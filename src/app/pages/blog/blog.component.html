@@ -1,28 +1,149 @@
-<div class="blog-root">
+<mat-sidenav-container class="demo-root" fullscreen>
+  <!-- 头部 -->
+  <mat-toolbar color="primary" class='m-header'>
+
+    <button mat-icon-button class="m-menu" (click)="start.open('mouse')">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="demo-toolbar">
+      <h1> Material</h1>
+      <div>
+        <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+          <mat-icon>fullscreen</mat-icon>
+        </button>
+        <button mat-button (click)="toggleTheme()">{{dark ? 'Light' : 'Dark'}} theme</button>
+        <button mat-button (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
+          {{root.dir.toUpperCase()}}
+        </button>
+      </div>
+    </div>
+
+  </mat-toolbar>
+  <!-- nav -->
+  <mat-sidenav #start [mode]="'push'">
+    <!-- 侧边头部 -->
+    <mat-card>
+      <mat-card-header>
+        <img mat-card-avatar src="../../../assets/avatar.jpeg">
+        <!-- <mat-card-title>最光阴</mat-card-title> -->
+        <!-- <mat-card-subtitle>蹉跎错，消磨过，最是光阴化浮沫</mat-card-subtitle> -->
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angularjs.org/latest/img/washedout.png"> -->
+      <mat-card-content>
+        <div style="margin-top: 10px"></div>
+      <pre>
+      笑看嫣红染半山
+
+      逐风万里白云间
+
+      逍遥此生不为客
+
+      天地三才任平凡
+      </pre>
+      </mat-card-content>
+    </mat-card>
+    <div style="margin-top: 16px"></div>
+    <!-- 分类 -->
+    <mat-expansion-panel *ngFor="let navItem of items" [hideToggle]="hideToggle">
+      <mat-expansion-panel-header>{{navItem.category}}</mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-list-item 
+           (click)="start.close()" 
+           *ngFor="let item of navItem.subCategory" >
+          {{item}}
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <button mat-button tabindex="-1" (click)="start.close()">CLOSE</button>
   
-  <div class="app-header">
-      <mat-toolbar color="primary">
-          <button mat-icon-button (click)="start.open()">
-            <mat-icon>menu</mat-icon>
-          </button>
+  </mat-sidenav>
 
-          <div class="demo-toolbar">
-            <h1>Angular Material Demos</h1>
-            <div>
-              <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
-                <mat-icon>fullscreen</mat-icon>
-              </button>
-              <button mat-button (click)="toggleTheme()">{{dark ? 'Light' : 'Dark'}} theme</button>
-            </div>
-          </div>
-      </mat-toolbar>
+  <div>
+
+
+    <div #root="dir" dir="ltr" class="demo-content">
+
+      <mat-card>
+        <mat-card-title>Card with title and footer</mat-card-title>
+        <mat-card-subtitle>2017.10.12</mat-card-subtitle>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip>Chip 1</mat-chip>
+            <mat-chip>Chip 2</mat-chip>
+            <!-- <mat-chip>Chip 3</mat-chip> -->
+          </mat-chip-list>
+          <p> lore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button >MORE</button>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+        <mat-card-footer>
+        </mat-card-footer>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>Card with title and footer</mat-card-title>
+        <mat-card-subtitle>2017.10.12</mat-card-subtitle>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip>Chip 1</mat-chip>
+            <mat-chip>Chip 2</mat-chip>
+            <!-- <mat-chip>Chip 3</mat-chip> -->
+          </mat-chip-list>
+          <p>adipiscing elit, </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button >MORE</button>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+        <mat-card-footer>
+            <!-- <button mat-button>SHARE</button> -->
+        </mat-card-footer>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>Card with title and footer</mat-card-title>
+        <mat-card-subtitle>2017.10.12</mat-card-subtitle>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip>Chip 1</mat-chip>
+            <mat-chip>Chip 2</mat-chip>
+            <!-- <mat-chip>Chip 3</mat-chip> -->
+          </mat-chip-list>
+          <p>lit, sed do eiusmod temolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button >MORE</button>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+        <mat-card-footer>
+        </mat-card-footer>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>Card with title and footer</mat-card-title>
+        <mat-card-subtitle>2017.10.12</mat-card-subtitle>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip>Chip 1</mat-chip>
+            <mat-chip>Chip 2</mat-chip>
+            <!-- <mat-chip>Chip 3</mat-chip> -->
+          </mat-chip-list>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button >MORE</button>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+        <mat-card-footer>
+        </mat-card-footer>
+      </mat-card>
+
+
+      <router-outlet></router-outlet>
+    </div>
   </div>
-
-  <div class="app-drawer">
-      <app-drawer #start>
-          <div>hhh</div>
-          <div>hhh</div>
-      </app-drawer>
-  </div>
-
-</div>
+</mat-sidenav-container>
