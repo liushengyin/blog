@@ -1,0 +1,16 @@
+@import './typography';
+@import '../../components/toolbar/toolbar-theme';
+@import '../../components/button/button-theme';
+@import '../../components/icon/icon-theme';
+
+
+// Includes all of the typographic styles.
+@mixin angular-material-typography($config: null) {
+  @if $config == null {
+    $config: mat-typography-config();
+  }
+  
+  @include mat-toolbar-typography($config);
+  @include mat-button-typography($config);
+  @include mat-icon-typography($config);
+}

@@ -1,0 +1,28 @@
+<div class="blog-root">
+  
+  <div class="app-header">
+      <mat-toolbar color="primary">
+          <button mat-icon-button (click)="start.open()">
+            <mat-icon>menu</mat-icon>
+          </button>
+
+          <div class="demo-toolbar">
+            <h1>Angular Material Demos</h1>
+            <div>
+              <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+                <mat-icon>fullscreen</mat-icon>
+              </button>
+              <button mat-button (click)="toggleTheme()">{{dark ? 'Light' : 'Dark'}} theme</button>
+            </div>
+          </div>
+      </mat-toolbar>
+  </div>
+
+  <div class="app-drawer">
+      <app-drawer #start>
+          <div>hhh</div>
+          <div>hhh</div>
+      </app-drawer>
+  </div>
+
+</div>

@@ -1,0 +1,5 @@
+<div class="drawer-backdrop drawer-backdrop-out" [class.drawer-backdrop-in]="isShown" (click)='isShown=false'>
+    <div class="drawer default" (click)="$event.stopPropagation()">
+        <ng-content></ng-content>
+    </div>
+</div>
