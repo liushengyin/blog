@@ -1,0 +1,58 @@
+<div class="blog-detail">
+  <!-- 头部 -->
+  <div class='m-header' #header>
+    <div #topBar>
+      <mat-toolbar color="primary" >
+        <button mat-icon-button class="m-menu" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="demo-toolbar">
+          <!-- <h1> Material</h1> -->
+          <span></span>
+          <div>
+            <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+              <mat-icon>share</mat-icon>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let item of items" (click)="select(item.text)" [disabled]="item.disabled">
+                {{ item.text }}
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </mat-toolbar>
+    </div>
+    <div #middleBar class="middleBar">
+      最光阴
+    </div>
+    <div #bottomBar class="bottomBar">
+      蹉跎错，消磨过，最是光阴化浮沫
+    </div>
+  </div>
+
+
+
+  <!-- 内容 -->
+  <div class="demo-content">
+<div class="demo-gestures">
+    <div (pan)="panCount = panCount + 1" (longpress)="longpressCount = longpressCount + 1"
+         (press)="pressCount = pressCount + 1" (swipe)="swipeCount = swipeCount + 1"
+         (slide)="slide($event)">
+        Drag, swipe, or press me.
+    </div>
+    <p>Pan: {{panCount}}</p>
+    <p>Longpress: {{longpressCount}}</p>
+    <p>Press: {{pressCount}}</p>
+    <p>Swipe: {{swipeCount}}</p>
+    <p>Slide: {{slideCount}}</p>
+</div>
+        <p> lore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p> lore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p> lore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p> lore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  </div>
+</div>

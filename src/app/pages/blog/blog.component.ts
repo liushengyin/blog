@@ -1,19 +1,5 @@
 import {Component, ElementRef, Renderer2, ViewEncapsulation} from '@angular/core';
 
-
-/**
- * Home component for welcome message in DemoApp.
- */
-@Component({
-  selector: 'home',
-  template: `
-    <p>Welcome to the development demos for Angular Material!</p>
-    <p>Open the sidenav to select a demo.</p>
-  `
-})
-export class Home {}
-
-
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -30,45 +16,6 @@ export class BlogComponent {
     {category: '测试',subCategory:['Jasmine']},
     {category: '其它',subCategory:['面向对象']},
   ];
-  navItems = [
-    {name: 'Autocomplete', route: '/autocomplete'},
-    {name: 'Button Toggle', route: '/button-toggle'},
-    {name: 'Button', route: '/button'},
-    {name: 'Card', route: '/card'},
-    {name: 'Checkbox', route: '/checkbox'},
-    {name: 'Chips', route: '/chips'},
-    {name: 'Datepicker', route: '/datepicker'},
-    {name: 'Dialog', route: '/dialog'},
-    {name: 'Drawer', route: '/drawer'},
-    {name: 'Expansion Panel', route: '/expansion'},
-    {name: 'Focus Origin', route: '/focus-origin'},
-    {name: 'Gestures', route: '/gestures'},
-    {name: 'Grid List', route: '/grid-list'},
-    {name: 'Icon', route: '/icon'},
-    {name: 'Input', route: '/input'},
-    {name: 'List', route: '/list'},
-    {name: 'Live Announcer', route: '/live-announcer'},
-    {name: 'Menu', route: '/menu'},
-    {name: 'Overlay', route: '/overlay'},
-    {name: 'Platform', route: '/platform'},
-    {name: 'Portal', route: '/portal'},
-    {name: 'Progress Bar', route: '/progress-bar'},
-    {name: 'Progress Spinner', route: '/progress-spinner'},
-    {name: 'Radio', route: '/radio'},
-    {name: 'Ripple', route: '/ripple'},
-    {name: 'Screen Type', route: '/screen-type'},
-    {name: 'Select', route: '/select'},
-    {name: 'Sidenav', route: '/sidenav'},
-    {name: 'Slide Toggle', route: '/slide-toggle'},
-    {name: 'Slider', route: '/slider'},
-    {name: 'Snack Bar', route: '/snack-bar'},
-    {name: 'Stepper', route: '/stepper'},
-    {name: 'Table', route: '/table'},
-    {name: 'Tabs', route: '/tabs'},
-    {name: 'Toolbar', route: '/toolbar'},
-    {name: 'Tooltip', route: '/tooltip'},
-    {name: 'Typography', route: '/typography'}
-  ];
 
   constructor(
     private _element: ElementRef,
@@ -76,15 +23,28 @@ export class BlogComponent {
 
   toggleFullscreen() {
     let elem = this._element.nativeElement.querySelector('.demo-root');
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullScreen) {
-      elem.webkitRequestFullScreen();
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-    } else if (elem.msRequestFullScreen) {
-      elem.msRequestFullScreen();
+    console.log(this.isDocumentInFullScreenMode())
+
+    if (!this.isDocumentInFullScreenMode()) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullScreen) {
+          elem.webkitRequestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.msRequestFullScreen) {
+          elem.msRequestFullScreen();
+        }
+    } else {
+      if (document.exitFullscreen) {
+          document.exitFullscreen(); 
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
     }
+  }
+  isDocumentInFullScreenMode() {
+    return (document.fullscreenElement && document.fullscreenElement !== null) || (document.webkitIsFullScreen);
   }
 
   toggleTheme() {

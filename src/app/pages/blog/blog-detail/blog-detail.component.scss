@@ -1,0 +1,82 @@
+// @import '../../../core/style/variables';
+@import '../../../components/toolbar/toolbar';
+
+.blog-detail {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: #fafafa;
+}
+.demo-gestures div {
+  height: 100px;
+  width: 200px;
+  background: gray;
+  padding: 15px;
+  color: white;
+}
+
+.mat-toolbar {
+    .mat-icon {
+      cursor: pointer;
+    }
+    .demo-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+}
+
+.demo-content {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.m-header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  background: #3f51b5;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+@mixin toolbar-height($height) {
+  .middleBar,.bottomBar {
+    height: $height;
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 16px;
+    align-items: center;
+  }
+  .m-header {
+    height: calc(#{$height} * 3);
+  }
+  .demo-content {
+    margin-top: calc(#{$height} * 3);
+  }
+}
+
+.middleBar {
+  margin-left: 40px;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+.bottomBar {
+  margin-left: 40px;
+  font-family: 400 16px/24px 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+@include toolbar-height($mat-toolbar-height-desktop);
+
+@media ($mat-xsmall) {
+  @include toolbar-height($mat-toolbar-height-mobile-portrait);
+}

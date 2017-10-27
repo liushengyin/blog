@@ -7,18 +7,21 @@ import { MatToolbarModule } from './components/toolbar'
 import { MatButtonModule } from './components/button'
 import { MatIconModule } from './components/icon'
 import { MaterialModule } from './material-module'
-import {ALL_ROUTES} from './routes';
+import { AppRoutingModule } from './app-routes';
 
 import { AppComponent } from './app.component';
 import { AppDrawerComponent } from './components/app-drawer/app-drawer.component';
 import { BlogComponent } from './pages/blog/blog.component';
-
+import { BlogDetailComponent } from './pages/blog/blog-detail/blog-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     AppDrawerComponent,
     BlogComponent,
+    BlogDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ import { BlogComponent } from './pages/blog/blog.component';
     MatButtonModule,
     MatIconModule,
     MaterialModule,
-    RouterModule.forRoot(ALL_ROUTES)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

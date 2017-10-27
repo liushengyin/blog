@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 36px;
+    flex-wrap: wrap;
+}
+.content {
+    width: 100%;
+    text-align: center;
+    padding-top: 16px;
+}
+.tab-logo {
+    background: url("../../../assets/tablogo.png");
+    background-position: 0 0;
+    height: 60px;
+    width: 180px;
+
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    font-size: 12px;
+    word-spacing: normal;
+    letter-spacing: normal;
+}
+.not_found_bg {
+    position: fixed;
+    bottom: 0;
+    height: 222px;
+    width: 100%;
+    background: url("../../../assets/404_bg.png");
+}
