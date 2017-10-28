@@ -1,11 +1,12 @@
-import {Component, ElementRef, Renderer2, ViewEncapsulation} from '@angular/core';
+import {Component,HostBinding, ElementRef, Renderer2, ViewEncapsulation} from '@angular/core';
+import {query, stagger, animate, style, transition, trigger} from '@angular/animations';
+
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+  encapsulation: ViewEncapsulation.None
 })
 export class BlogComponent {
   dark = false;
@@ -54,10 +55,8 @@ export class BlogComponent {
 
     if (this.dark) {
       this._renderer.addClass(this._element.nativeElement, darkThemeClass);
-      // this._overlayContainer.getContainerElement().classList.add(darkThemeClass);
     } else {
       this._renderer.removeClass(this._element.nativeElement, darkThemeClass);
-      // this._overlayContainer.getContainerElement().classList.remove(darkThemeClass);
     }
   }
 }

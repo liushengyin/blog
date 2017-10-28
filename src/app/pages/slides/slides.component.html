@@ -2,7 +2,7 @@
              (pan)="panCount = panCount + 1"
              (longpress)="longpressCount = longpressCount + 1"
              (press)="pressCount = pressCount + 1"
-             (swipe)="swipeCount = swipeCount + 1"
+             (swipe)="onSwipe($event);swipeCount = swipeCount + 1;"
              >
 <!--              (slide)="_onSlide($event);slideCount = slideCount + 1"
              (slideend) =  "_onSlideEnd()"
@@ -12,13 +12,15 @@
       <button mat-icon-button class="m-menu" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      
+<!--       <button mat-icon-button class="m-menu" [routerLink]="['']">
+        <mat-icon>arrow_back</mat-icon>
+      </button> -->
+      <!-- <a [routerLink]="['./']"></a> -->
         <button mat-icon-button class="m-menu" (click)="drawer.open('mouse')">
           <mat-icon>menu</mat-icon>
         </button>
 
     </mat-toolbar>
-
     <div class="demo-gestures">
            <p>Pan: {{panCount}}</p>
            <p>Longpress: {{longpressCount}}</p>
@@ -26,6 +28,11 @@
            <p>Swipe: {{swipeCount}}</p>
            <p>Slide: {{slideCount}}</p>
     </div>
+
+<!--     <div style="padding: 32px">
+      <button [@heroState]="state" (click)="toogleState()">toogleState</button>
+      <div *ngIf="InOut" [@flyInOut]="flyInOut" >flyInOut</div>
+    </div> -->
 
     <app-drawer #drawer></app-drawer>
 </div>

@@ -14,7 +14,8 @@ import { AppDrawerComponent } from './components/app-drawer/app-drawer.component
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogDetailComponent } from './pages/blog/blog-detail/blog-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { SlidesComponent } from './pages/slides/slides.component'
+import { SlidesComponent } from './pages/slides/slides.component';
+import { SwitchComponent } from './pages/switch/switch.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SlidesComponent } from './pages/slides/slides.component'
     BlogComponent,
     BlogDetailComponent,
     NotFoundComponent,
-    SlidesComponent
+    SlidesComponent,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,
