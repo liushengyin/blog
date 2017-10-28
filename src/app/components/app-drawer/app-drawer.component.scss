@@ -1,66 +1,48 @@
-$mat-toolbar-height: 100vw !default;
+@import '../../core/style/variables';
+
+// 灰色背景
 .drawer-backdrop {
-  display: block;
-  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  width: $mat-toolbar-height;
-}
-
-.drawer-backdrop-out {
-  background: rgba(0,0,0,0);
-  transform: translate3d(-100%,0,0);
-  transition: transform 0.3s ease-out;
-}
-
-.drawer-backdrop-in {
-  background: rgba(0,0,0,0.2);
-  transform: translateX(0);
-  transition: background 0.3s ease-in;
-}
-
-.drawer {
-  display: block;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  display: block;
   z-index: 3;
-  width: 80vw;
+  visibility: hidden;
+}
+.drawer-backdrop {
+  transition-duration: .2s;
+  transition-timing-function: cubic-bezier(.25,.8,.25,1);
+  transition-property: background-color;
+}
+// .drawer-backdrop-in {
+  // visibility: visible;// 通过visibility实现
+  // background-color: rgba(0, 0, 0, 0.6); // 设置背景的透明度
+// }
+
+// 侧栏
+.drawer {
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  display: block;
+  z-index: 3;
+  width: 300px;
   outline: 0;
   overflow-y: auto;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.87);
   transform: translate3d(-100%,0,0);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.4s cubic-bezier(.25,.8,.25,1);
 }
 
-.drawer-backdrop-in .drawer {
-  transform: translate3d(0,0,0);
-  transition: transform 0.3s ease;
-}
+// .drawer-in {
+//   transform: translate3d(0,0,0); // 通过translateX实现
+// }
 
-.default {
-  background-color: #2A457A;
-  color: #efefef;
-}
-
-@media (min-width: 800px) {
-  .drawer-backdrop {
-    position: static;
-    float: left;
-    width: 300px;
-    height: 100vh;
-  }
-  .drawer-backdrop:after {
-    content: "";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
-  .drawer-backdrop-out {
-    transform: translate3d(0,0,0);
-  }
+@media ($mat-xsmall) {
   .drawer {
-    width: 100%;
-    transform: translate3d(0,0,0);
+    width: 80vw;
   }
 }

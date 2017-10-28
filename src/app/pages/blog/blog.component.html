@@ -20,7 +20,7 @@
     </div>
 
   </mat-toolbar>
-  <!-- nav -->
+  <!-- nav slide, push, over-->
   <mat-sidenav #start [mode]="'push'">
     <!-- 侧边头部 -->
     <mat-card>
@@ -84,7 +84,7 @@
         </mat-card-footer>
       </mat-card>
 
-      <mat-card>
+      <mat-card [routerLink]="['slides']">
         <mat-card-title>Card with title and footer</mat-card-title>
         <mat-card-subtitle>2017.10.12</mat-card-subtitle>
         <mat-card-content>

@@ -17,11 +17,7 @@ export class BlogDetailComponent implements OnInit {
   id = '';
   scheduledAnimationFrame = false;
   toolbarHeight = 64;
-    panCount: number = 0;
-  pressCount: number = 0;
-  longpressCount: number = 0;
-  swipeCount: number = 0;
-  slideCount: number = 0;
+
   constructor( private route: ActivatedRoute ,
                private location: Location,
                private renderer: Renderer) { }
@@ -64,9 +60,5 @@ export class BlogDetailComponent implements OnInit {
     this.bottomBar.nativeElement.style.transform = `scale(${1-number/headerHeight}) translateZ(0px)`
     this.bottomBar.nativeElement.style.opacity = `${1-number/headerHeight}`
   }
-
-   slide(ev){
-     console.log(ev);
-   }
 
 }

@@ -13,7 +13,8 @@ import { AppComponent } from './app.component';
 import { AppDrawerComponent } from './components/app-drawer/app-drawer.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogDetailComponent } from './pages/blog/blog-detail/blog-detail.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component'
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SlidesComponent } from './pages/slides/slides.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component'
     AppDrawerComponent,
     BlogComponent,
     BlogDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SlidesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,11 @@
-<div class="drawer-backdrop drawer-backdrop-out" [class.drawer-backdrop-in]="isShown" (click)='isShown=false'>
-    <div class="drawer default" (click)="$event.stopPropagation()">
+<div class="drawer-container">
+
+    <div class="drawer-backdrop" (click)='close()'>
+    </div>
+    <div class="drawer"
+    (slidestart) = "_onSlideStart($event)"
+    (slide)="_onSlide($event)"
+    (slideend) ="_onSlideEnd($event)">
         <ng-content></ng-content>
     </div>
 </div>
