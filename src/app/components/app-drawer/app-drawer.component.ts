@@ -55,8 +55,6 @@ export class AppDrawerComponent implements OnInit {
   }
 
   _onSlide(event) {
-    event.preventDefault();
-
     let x = this.transX + event.deltaX
 
     if (this.scheduledAnimationFrame)

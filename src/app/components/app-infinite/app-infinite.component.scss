@@ -1,0 +1,60 @@
+
+$infinite-scroll-loading-color:          rgba(0,0,0,0.54) !default;
+$infinite-scroll-loading-text-color:     $infinite-scroll-loading-color !default;
+
+
+.infinite-scroll {
+  display: block;
+
+  width: 100%;
+}
+
+
+// Infinite Scroll Content
+// --------------------------------------------------
+
+.infinite-loading {
+  text-align: center;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100%;
+  min-height: 84px;
+}
+
+.spinner-crescent{
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  svg{
+    animation-duration: 750ms;
+    animation: spinner-rotate 1s linear infinite;
+    stroke: #000;
+  }
+  circle {
+    fill: transparent;
+    stroke-width: 4px;
+    stroke-dasharray: 128px;
+    stroke-dashoffset: 82px;
+    transition: background-color .2s linear;
+  }
+  @keyframes spinner-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+.infinite-loading-text {
+  color: $infinite-scroll-loading-text-color;
+}
+
+.infinite-loading-spinner svg{
+  stroke: $infinite-scroll-loading-color;
+}
+
+
+
+

@@ -1,0 +1,18 @@
+<div class="infinite-scroll" *ngIf=" state=='loading' ">
+
+    <div class="infinite-loading">
+      <div class="infinite-loading-spinner">
+
+        <div class="spinner-crescent">
+            <svg viewBox="0 0 64 64">
+                <circle transform="translate(32,32)" r="26"></circle>
+            </svg>
+        </div>
+
+      </div>
+      <div class="infinite-loading-text" *ngIf="loadingText">
+          {{loadingText}}
+      </div>
+    </div>
+
+</div>

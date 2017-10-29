@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SwitchComponent } from './switch.component';
+import { AppInfiniteComponent } from './app-infinite.component';
 
-describe('SwitchComponent', () => {
-  let component: SwitchComponent;
-  let fixture: ComponentFixture<SwitchComponent>;
+describe('AppInfiniteComponent', () => {
+  let component: AppInfiniteComponent;
+  let fixture: ComponentFixture<AppInfiniteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SwitchComponent ]
+      declarations: [ AppInfiniteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SwitchComponent);
+    fixture = TestBed.createComponent(AppInfiniteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
