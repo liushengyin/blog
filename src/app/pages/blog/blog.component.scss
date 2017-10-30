@@ -46,6 +46,7 @@ body {
   width: 100%;
   height: 100%;
   padding: 32px;
+  padding-bottom: 0;
   margin-top: 48px;
   max-width: 960px;
   margin-left: auto;
@@ -62,7 +63,8 @@ body {
     margin-right: 16px;
     margin-bottom: 16px;
     cursor: pointer;
-
+    outline: none;
+    
     &:nth-child(2n) {
       margin-right: 0;
     }
@@ -71,7 +73,20 @@ body {
     }
   }
 }
+.slide-button {
+  padding: 0 24px!important;
+}
+// 列表底部文字
+.end-text {
+  text-align: center;
+  display: flex;
 
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100%;
+  min-height: 84px;
+}
 @media ($mat-xsmall) {
   .demo-content {
     .mat-card {

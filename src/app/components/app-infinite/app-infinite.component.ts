@@ -96,7 +96,10 @@ export class AppInfiniteComponent implements OnInit {
    * @param {boolean}
    */
   enable(shouldEnable: boolean) {
-    this.state = (shouldEnable ? STATE_ENABLED : STATE_DISABLED);
+    // 防止抖动 TODO 这种解决方案不好，应该另想方法
+    setTimeout(()=>{
+      this.state = (shouldEnable ? STATE_ENABLED : STATE_DISABLED);
+    },200);
   }
 
   /**
@@ -111,8 +114,12 @@ export class AppInfiniteComponent implements OnInit {
     if (this.state !== STATE_LOADING) {
       return;
     }
+    this.state = STATE_DISABLED;
+    // 防止抖动 TODO 这种解决方案不好，应该另想方法
+    setTimeout(()=>{
+      this.state = STATE_ENABLED;
+    },100);
 
-    this.state = STATE_ENABLED;
   }
 }
 

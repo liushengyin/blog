@@ -47,6 +47,9 @@ export class BlogDetailComponent implements OnInit {
       this.scheduledAnimationFrame = true;
       requestAnimationFrame(this.readAndUpdatePage.bind(this, number));
   }
+  onScroll(event){
+    console.log(event);
+  }
   readAndUpdatePage(number){
     this.scheduledAnimationFrame = false;
     let headerHeight = this.toolbarHeight*2;
