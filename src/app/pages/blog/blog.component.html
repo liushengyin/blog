@@ -75,7 +75,8 @@
 
   <div>
     <div #root="dir" dir="ltr" class="demo-content">
-      <mat-card *ngFor='let article of articles' [routerLink]="['detail', article.id]">
+      <!-- <mat-card *ngFor='let article of articles' [routerLink]="['detail', article.id]"> -->
+      <mat-card *ngFor='let article of articles' (click)='toBlogDetail(article.id)'>
         <mat-card-title>{{article.title}}</mat-card-title>
         <mat-card-subtitle>{{article.created_at|date:'y.mm.dd'}}</mat-card-subtitle>
         <mat-card-content>

@@ -11,7 +11,7 @@ export const BLOG_ROUTES: Routes = [
 
 export const routes: Routes = [
   {path: '',  component: BlogComponent, children: BLOG_ROUTES, data: { animation: { value: 'blog' } }},
-  {path: 'detail/:id',  component: BlogDetailComponent, data: { animation: { value: 'slides' } } },
+  {path: 'detail',  component: BlogDetailComponent, data: { animation: { value: 'slides' } } },
   {path: 'slides',  component: SlidesComponent,data: { animation: { value: 'slides' } } },
   {path: '**', component: NotFoundComponent }
 ];

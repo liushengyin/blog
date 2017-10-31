@@ -2,7 +2,7 @@ import {Component, ViewChild, OnInit, HostBinding, ElementRef, Renderer2, ViewEn
 import {query, stagger, animate, style, transition, trigger} from '@angular/animations';
 import { Data } from '../../providers/data';
 import { AppInfiniteComponent } from '../../components/app-infinite/app-infinite.component';
-
+import { Router, NavigationExtras} from '@angular/router';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -30,6 +30,7 @@ export class BlogComponent implements OnInit {
 
   constructor(
     public data:Data,
+    private router:Router,
     private _element: ElementRef,
     private _renderer: Renderer2) {}
 
@@ -126,7 +127,13 @@ export class BlogComponent implements OnInit {
     this.infinite.enable(false);
     this.endList = true;
   }
-
+  // 详情页面
+  toBlogDetail(id) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: { 'id': id, 'categoryId': this.categoryId },
+    };
+    this.router.navigate(['/detail'], navigationExtras);
+  }
   // 全屏
   toggleFullscreen() {
     let elem = this._element.nativeElement.querySelector('.demo-root');
