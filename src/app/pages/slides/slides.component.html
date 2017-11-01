@@ -5,7 +5,7 @@
             (slide)="_onSlide($event);slideCount = slideCount + 1"
             (slideend) =  "_onSlideEnd($event)"
             (slidestart) = "_onSlideStart($event)"
-             (swipe)="onSwipe($event);swipeCount = swipeCount + 1;" -->
+            (swipe)="onSwipe($event);swipeCount = swipeCount + 1;" -->
     <mat-toolbar color="primary" >
 
     <button mat-icon-button class="m-menu" (click)="goBack()">
@@ -17,15 +17,20 @@
     </button>
 
     </mat-toolbar>
-    <div class="demo-gestures">
+<!--     <div class="demo-gestures">
            <p>Pan: {{panCount}}</p>
            <p>Longpress: {{longpressCount}}</p>
            <p>Press: {{pressCount}}</p>
            <p>Swipe: {{swipeCount}}</p>
            <p>Slide: {{slideCount}}</p>
     </div>
-    
+     -->
   <div class="demo-content">
+    <app-drawer #drawer></app-drawer>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="下拉刷新">
+    </ion-refresher-content>
+  </ion-refresher>
     <mat-list>
       <h3 mat-subheader>Items</h3>
       <mat-list-item *ngFor="let item of items">
@@ -34,5 +39,4 @@
     </mat-list>
   </div>
   <infinite-scroll loadingText="加载更多" (infinite)="doInfinite($event)"></infinite-scroll>
-  <app-drawer #drawer></app-drawer>
 </div>

@@ -32,6 +32,11 @@ export class BlogDetailComponent implements OnInit {
   };
   pre = null;
   next = null;
+  touchEvent = {
+    clientX:0,
+    clientY:0,
+    timeStamp:0
+  };
 
   constructor( private route: ActivatedRoute ,
                private location: Location,
@@ -83,20 +88,70 @@ export class BlogDetailComponent implements OnInit {
       console.log(error);
   }
   toPrevious(){
+
+    if(!this.pre)return;
+
     this.id = this.pre.id;
     this.getData();
+
   }
   toNext(){
+
+    if(!this.next) return;
+
     this.id = this.next.id;
     this.getData();
   }
   goBack(): void {
     this.location.back();
   }
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  ngAfterViewInit() {
     this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
+    document.addEventListener('touchstart',this._touchStart.bind(this), false);  
+    document.addEventListener('touchend',this._touchEnd.bind(this), false);  
+  }
+  _touchStart(ev) {
+    this.touchEvent.clientX = ev.touches[0].clientX;
+    this.touchEvent.clientY = ev.touches[0].clientY;
+    this.touchEvent.timeStamp = ev.timeStamp;
+  }
+
+  _touchEnd(ev) {
+    let newEvent = {
+      clientX: ev.changedTouches[0].clientX,
+      clientY: ev.changedTouches[0].clientY,
+      timeStamp:ev.timeStamp
+    }
+
+    let recognize = this.isSwipe(this.touchEvent,newEvent);
+    if(recognize.swip) {
+      console.log(recognize.direction)
+      if(recognize.direction == 'left') {
+        this.toNext();
+      } else {
+        this.toPrevious()
+      }
+    }
+  }
+
+  isSwipe(startEvent,endEvent){
+    let deltX = endEvent.clientX - startEvent.clientX;
+    let deltY = endEvent.clientY - startEvent.clientY;
+    let deltT = endEvent.timeStamp - startEvent.timeStamp;
+    let recognize = {
+       direction: deltX > 0 ? 'right':'left',
+       swip:( Math.abs(deltX) > 120 ) && ( Math.abs(deltY) < 20 ) && ( deltT < 300)
+     }
+    return recognize;
+  }
+
+  onSwipe(event){
+    console.log(event);
+  }
+
+  @HostListener("window:scroll", ["$event"])
+  onWindowScroll(ev) {
+    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
     if (this.scheduledAnimationFrame)
         return;
@@ -104,12 +159,20 @@ export class BlogDetailComponent implements OnInit {
       requestAnimationFrame(this.updatePage.bind(this, number));
   }
 
+  @HostListener("window:resize")
+  onWindowResize(event) {
+      this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
+  }
   updatePage(number){
     this.scheduledAnimationFrame = false;
     let headerHeight = this.toolbarHeight*2;
 
-    if(number > headerHeight) number = headerHeight;
+    if(number > headerHeight){
+      number = headerHeight;
+      this.middleBar.nativeElement.style.width = `50%`;
+    } 
     // this.renderer.setElementStyle(this.topBar.nativeElement, 'transform', 'translate3d(0px, 100px, 0px)');
+    this.header.nativeElement.style.boxShadow = `0 2px 5px rgba(0,0,0,${.26*number/headerHeight})`
     this.header.nativeElement.style.transform = `translate3d(0px, -${number}px, 0px)`
     this.topBar.nativeElement.style.transform = `translate3d(0px, ${number}px, 0px)`
     this.middleBar.nativeElement.style.transform = `translate3d(0px, ${number/2}px, 0px)`

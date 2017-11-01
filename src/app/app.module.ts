@@ -19,6 +19,8 @@ import { BlogDetailComponent } from './pages/blog/blog-detail/blog-detail.compon
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SlidesComponent } from './pages/slides/slides.component';
 import { AppInfiniteComponent } from './components/app-infinite/app-infinite.component';
+import { AppRefresherComponent } from './components/app-refresher/app-refresher.component';
+import { Refresher } from './components/app-refresher/refresher';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AppInfiniteComponent } from './components/app-infinite/app-infinite.com
     BlogDetailComponent,
     NotFoundComponent,
     SlidesComponent,
-    AppInfiniteComponent
+    AppInfiniteComponent,
+    AppRefresherComponent,
+    Refresher
   ],
   imports: [
     BrowserModule,

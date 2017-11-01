@@ -27,7 +27,7 @@ export class SlidesComponent implements OnInit {
                public _elementRef: ElementRef) { }
 
   ngOnInit() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
       this.items.push( this.items.length );
     }
   }
@@ -45,6 +45,13 @@ export class SlidesComponent implements OnInit {
   //     this.goBack();
   //   }
   // }
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
   
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');

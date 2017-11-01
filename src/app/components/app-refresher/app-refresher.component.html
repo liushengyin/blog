@@ -1,0 +1,17 @@
+<div class="refresher-pulling">
+  <div class="refresher-pulling-icon">
+    <div class="refresher-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M128.4 160L96 192.3 256 352l160-159.7-32.4-32.3L256 287.3z"/></svg>    </div>
+  </div>
+  <div class="refresher-pulling-text" [innerHTML]="pullingText" *ngIf="pullingText"></div>
+</div>
+<div class="refresher-refreshing">
+  <div class="refresher-refreshing-icon">
+    <div class="spinner-crescent">
+        <svg viewBox="0 0 64 64">
+            <circle transform="translate(32,32)" r="26"></circle>
+        </svg>
+    </div>
+  </div>
+  <div class="refresher-refreshing-text" [innerHTML]="refreshingText" *ngIf="refreshingText"></div>
+</div>

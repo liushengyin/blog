@@ -1,0 +1,165 @@
+
+// Global Functions
+@import "../../themes/functions";
+
+
+// Global Mixins
+@import "../../themes/mixins";
+$app-direction: ltr !default;
+
+// Refresher
+// --------------------------------------------------
+$z-index-refresher:              0; // scss-lint:disable DefaultRule
+
+/// @prop - Height of the refresher
+$refresher-height:             60px !default;
+
+/// @prop - Color of the refresher icon
+$refresher-icon-color:         rgba(0,0,0,0.54) !default;
+
+/// @prop - Font size of the refresher icon
+$refresher-icon-font-size:     30px !default;
+
+/// @prop - Text color of the refresher content
+$refresher-text-color:         rgba(0,0,0,0.54) !default;
+
+/// @prop - Font size of the refresher content
+$refresher-text-font-size:     16px !default;
+
+/// @prop - Border color of the refresher
+$refresher-border-color:       #ddd !default;
+
+
+ion-refresher {
+  @include position(-$refresher-height, null, null, 0);
+
+  position: absolute;
+
+  z-index: $z-index-refresher;
+
+  display: none;
+
+  width: 100%;
+  height: $refresher-height;
+
+  &.refresher-active {
+    display: block;
+  }
+}
+
+// Refresher Content
+// --------------------------------------------------
+
+ion-refresher-content {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100%;
+}
+
+.refresher-pulling,
+.refresher-refreshing {
+  display: none;
+
+  width: 100%;
+}
+
+.refresher-pulling-icon,
+.refresher-refreshing-icon {
+  @include text-align(center);
+  @include transform-origin(center);
+
+  font-size: $refresher-icon-font-size;
+  color: $refresher-icon-color;
+  transition: 200ms;
+}
+
+.refresher-pulling-text,
+.refresher-refreshing-text {
+  @include text-align(center);
+
+  font-size: $refresher-text-font-size;
+  color: $refresher-text-color;
+}
+
+.refresher-refreshing .spinner-crescent circle {
+  stroke: $refresher-icon-color;
+}
+
+.refresher-pulling .refresher-arrow{
+  fill: $refresher-icon-color;
+}
+// Refresher Content States
+// --------------------------------------------------
+
+ion-refresher-content[state=pulling] {
+  .refresher-pulling {
+    display: block;
+  }
+}
+
+ion-refresher-content[state=ready] {
+  .refresher-pulling {
+    display: block;
+  }
+
+  .refresher-pulling-icon {
+    transform: rotate(180deg);
+  }
+}
+
+ion-refresher-content[state=refreshing] {
+  .refresher-refreshing {
+    display: block;
+  }
+}
+
+ion-refresher-content[state=cancelling] {
+  .refresher-pulling {
+    display: block;
+  }
+
+  .refresher-pulling-icon {
+    transform: scale(0);
+  }
+}
+
+ion-refresher-content[state=completing] {
+  .refresher-refreshing {
+    display: block;
+  }
+
+  .refresher-refreshing-icon {
+    transform: scale(0);
+  }
+}
+.refresher-arrow {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+}
+.spinner-crescent{
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  svg{
+    animation-duration: 750ms;
+    animation: spinner-rotate 1s linear infinite;
+    stroke: #000;
+  }
+  circle {
+    fill: transparent;
+    stroke-width: 4px;
+    stroke-dasharray: 128px;
+    stroke-dashoffset: 82px;
+    transition: background-color .2s linear;
+  }
+  @keyframes spinner-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
