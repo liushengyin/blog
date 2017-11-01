@@ -107,8 +107,8 @@ export class BlogDetailComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
-    document.addEventListener('touchstart',this._touchStart.bind(this), false);  
-    document.addEventListener('touchend',this._touchEnd.bind(this), false);  
+    document.addEventListener('touchstart',this._touchStart.bind(this), false);
+    document.addEventListener('touchend',this._touchEnd.bind(this), false);
   }
   _touchStart(ev) {
     this.touchEvent.clientX = ev.touches[0].clientX;
@@ -152,7 +152,7 @@ export class BlogDetailComponent implements OnInit {
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(ev) {
     let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-
+    if (number > this.toolbarHeight*3)
     if (this.scheduledAnimationFrame)
         return;
       this.scheduledAnimationFrame = true;
@@ -170,7 +170,10 @@ export class BlogDetailComponent implements OnInit {
     if(number > headerHeight){
       number = headerHeight;
       this.middleBar.nativeElement.style.width = `50%`;
-    } 
+    } else {
+      this.middleBar.nativeElement.style.width = `100%`;
+    }
+
     // this.renderer.setElementStyle(this.topBar.nativeElement, 'transform', 'translate3d(0px, 100px, 0px)');
     this.header.nativeElement.style.boxShadow = `0 2px 5px rgba(0,0,0,${.26*number/headerHeight})`
     this.header.nativeElement.style.transform = `translate3d(0px, -${number}px, 0px)`

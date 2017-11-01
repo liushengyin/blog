@@ -95,7 +95,8 @@
 @mixin toolbar-height($height) {
   .middleBar,.bottomBar {
     height: $height;
-    display: flex;
+    line-height: $height;
+    display: block;
     box-sizing: border-box;
     width: 100%;
     align-items: center;
@@ -109,8 +110,7 @@
 }
 
 .middleBar {
-  margin-left: 40px;
-  padding: 0 16px;
+  margin: 0 16px 0 56px;
   font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
   overflow: hidden;
   white-space: nowrap;
