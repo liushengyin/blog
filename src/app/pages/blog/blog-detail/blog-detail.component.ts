@@ -1,15 +1,22 @@
-import { Renderer, Component, HostListener,ViewChild,ElementRef, Input, OnInit,ViewEncapsulation } from '@angular/core';
+import { Renderer, HostBinding, Component, HostListener,ViewChild,ElementRef, Input, OnInit,ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 import { Data } from '../../../providers/data';
+import { Router }                 from '@angular/router';
+import { slideInDownAnimation }   from '../../../animations';
 
 @Component({
   selector: 'app-blog-detail',
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.scss'],
   // encapsulation: ViewEncapsulation.None
+  animations: [ slideInDownAnimation ]
 })
 export class BlogDetailComponent implements OnInit {
+  // @HostBinding('@routeAnimation') routeAnimation = true;
+  // @HostBinding('style.display')   display = 'block';
+  // @HostBinding('style.position')  position = 'absolute';
+
   @ViewChild("header") header: ElementRef
   @ViewChild("topBar") topBar: ElementRef
   @ViewChild("middleBar") middleBar: ElementRef
@@ -38,9 +45,10 @@ export class BlogDetailComponent implements OnInit {
     timeStamp:0
   };
 
-  constructor( private route: ActivatedRoute ,
+  constructor( private route: ActivatedRoute,
                private location: Location,
                private renderer: Renderer,
+               private router: Router,
                public data: Data) { }
   items = [
     {text: 'Refresh'},
@@ -64,6 +72,8 @@ export class BlogDetailComponent implements OnInit {
   }
   // 获取博客列表
   getData() {
+    if(!this.id) return;
+
     let url = new URL(`article/${this.id}`,this.baseUrl);
     if(this.categoryId != 0) {
       url.searchParams.append("categoryId", this.categoryId);
@@ -103,7 +113,25 @@ export class BlogDetailComponent implements OnInit {
     this.getData();
   }
   goBack(): void {
-    this.location.back();
+    this.closePopup();
+    // this.location.back();
+  }
+  closePopup() {
+    // Providing a `null` value to the named outlet
+    // clears the contents of the named outlet
+    this.router.navigate(['',{ outlets: { blogDetail: null }}]);
+  }
+
+  share() {
+    if ((<any>navigator).share) {
+      (<any>navigator).share({
+          title: 'Web Fundamentals',
+          text: 'Check out Web Fundamentals — it rocks!',
+          url: 'https://developers.google.com/web',
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
   }
   ngAfterViewInit() {
     this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
@@ -152,6 +180,7 @@ export class BlogDetailComponent implements OnInit {
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(ev) {
     let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    console.log(number)
     if (number > this.toolbarHeight*3)
     if (this.scheduledAnimationFrame)
         return;

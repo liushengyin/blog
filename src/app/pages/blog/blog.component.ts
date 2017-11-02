@@ -3,6 +3,7 @@ import {query, stagger, animate, style, transition, trigger} from '@angular/anim
 import { Data } from '../../providers/data';
 import { AppInfiniteComponent } from '../../components/app-infinite/app-infinite.component';
 import { Router, NavigationExtras} from '@angular/router';
+
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -13,19 +14,14 @@ export class BlogComponent implements OnInit {
   @ViewChild(AppInfiniteComponent) infinite: AppInfiniteComponent
 
   dark = false;
+
   categories = [];
   categoryId = 0;
-  // [
-  //   {category: '前端',subCategory:['HTML','CSS','Javascript','AngularJS','工程化']},
-  //   {category: '后端',subCategory:['PHP','SQL','APACHE']},
-  //   {category: '工具',subCategory:['git','IDE','Docker']},
-  //   {category: '测试',subCategory:['Jasmine']},
-  //   {category: '其它',subCategory:['面向对象']},
-  // ];
 
   articles = [];
   next_page = 1;
-  endList = false;
+  empty = false;
+
   baseUrl = 'http://www.liushengyin.com/api/';
 
   constructor(
@@ -38,23 +34,22 @@ export class BlogComponent implements OnInit {
     this.getData();
     this.getCategories();
   }
+
   ngAfterViewInit() {
+    // 监听元素滚动事件，TODO 解决方案不是太好
     this._element.nativeElement.querySelector('.mat-drawer-content').onscroll = this.infinite.onWindowScroll.bind(this.infinite);
   }
-  scroll(event) {
-    console.log('event',event);
-  }
 
-  // 获取博客列表
+  // 获取数据
   getData() {
-    let url = new URL('article',this.baseUrl);
-    url.searchParams.append("page", this.next_page+'');
+    // 构建URL路径
 
+    let url = 'article';
+    url = url + `?page=${this.next_page}`;
     if(this.categoryId) {
-      url.searchParams.append("categoryId", this.categoryId+'');
+      url = url + `&categoryId=${this.categoryId}`;
     }
 
-    // let url = `article?page=${this.next_page}`;
     this.data.get(url)
            .subscribe(
              data =>{ this.handleData(data)},
@@ -62,16 +57,17 @@ export class BlogComponent implements OnInit {
             );
   }
 
-  // 处理博客列表数据
+  // 处理数据
   handleData(data){
 
     this.infinite.complete();
-    console.log(data);
+
     if(data.articles.data.length) {
       this.updateListState(data);
     } else {
-      this.endListState();
+      this.emptyState();
     }
+
   }
 
   // 错误处理
@@ -81,7 +77,9 @@ export class BlogComponent implements OnInit {
 
   // 获取分类
   getCategories() {
+
     let url = `category`;
+
     this.data.get(url)
            .subscribe(
              data =>{ 
@@ -91,50 +89,87 @@ export class BlogComponent implements OnInit {
             );
   }
 
+  // 根据分类获取数据
   getDataFromCategory(item = null) {
+    // 初始化状态
     this.initeState();
+    // 获取分类id
     this.categoryId = item? item.id:0 ;
+    // 获取数据
     this.getData();
   }
+
   // 加载更多列表数据
   doInfinite(infiniteScroll) {
     this.getData();
   }
+
+  doRefresh(refresher) {
+
+    this.refresh();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
+  }
+
+  // 刷新
   refresh(){
     this.initeState();
     this.getData();
   }
+
   // 初始化参数状态
   initeState(){
     this.categoryId = 0;
     this.next_page = 1;
     this.articles = [];
-    this.endList = false;
+    this.empty = false;
     this.infinite.enable(true);
   }
+
   // 更新列表数据
   updateListState(data){
     this.next_page = data.articles.current_page + 1;
     let temArticles = data.articles.data;
     temArticles.forEach((item)=>{
+      item.created_at = item.created_at.substring(0,10);
       item.tag = item.tag.trim() == "" ? []:item.tag.trim().split(" ");
     });
     this.articles = this.articles.length ? this.articles.concat(temArticles): temArticles;
   }
 
   // 没有更多内容
-  endListState() {
+  emptyState() {
     this.infinite.enable(false);
-    this.endList = true;
+    this.empty = true;
   }
-  // 详情页面
+
+  // 进入详情页面
   toBlogDetail(id) {
+
     let navigationExtras: NavigationExtras = {
       queryParams: { 'id': id, 'categoryId': this.categoryId },
     };
-    this.router.navigate(['/detail'], navigationExtras);
+
+    this.router.navigate([ '',{ outlets: { blogDetail: ['blogDetail'] } } ], navigationExtras);
   }
-  // 全屏
+
+  // 分享 https&chrome 才可以使用，覆盖率50%左右
+  share() {
+
+    if ((<any>navigator).share) {
+      (<any>navigator).share({
+          title: 'Blog',
+          text: 'Sheng Blog',
+          url: 'https://www.liushengyin.com/',
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
+
+  }
+
+  // 切换全屏状态
   toggleFullscreen() {
     let elem = this._element.nativeElement.querySelector('.demo-root');
 
@@ -164,13 +199,12 @@ export class BlogComponent implements OnInit {
   // 更换颜色主题
   toggleTheme() {
     const darkThemeClass = 'unicorn-dark-theme';
-
     this.dark = !this.dark;
 
     if (this.dark) {
-      this._renderer.addClass(this._element.nativeElement, darkThemeClass);
+      this._renderer.addClass(document.body, darkThemeClass);
     } else {
-      this._renderer.removeClass(this._element.nativeElement, darkThemeClass);
+      this._renderer.removeClass(document.body, darkThemeClass);
     }
   }
 

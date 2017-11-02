@@ -1,3 +1,8 @@
-<div class="page" [@routerAnimations]="prepareRouteTransition(outlet)">
+<div [@routerAnimations]="prepareRouteTransition(outlet)">
+  <!-- <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a> -->
   <router-outlet #outlet="outlet"></router-outlet>
+  <router-outlet name="popup"></router-outlet>
+  <div class="blog-detail-wrap">
+    <router-outlet name="blogDetail"></router-outlet>
+  </div>
 </div>

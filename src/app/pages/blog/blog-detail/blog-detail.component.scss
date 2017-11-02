@@ -1,13 +1,25 @@
 // @import '../../../core/style/variables';
 @import '../../../components/toolbar/toolbar';
+// :host { 
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 3;
+//   background: white;
+// }
+
 
 .blog-detail {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    // background-color: #fafafa;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 2;
+  background: white;
+  // background-color: #fafafa;
 }
 
 .mat-toolbar {
@@ -127,4 +139,11 @@
 
 @media ($mat-xsmall) {
   @include toolbar-height($mat-toolbar-height-mobile-portrait);
+  .m-footer-section-left:hover, .m-footer-section-right:hover{
+    background: none;
+  }
+  .m-footer-section-left:active, .m-footer-section-right:active{
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
 }

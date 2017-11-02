@@ -1,48 +1,40 @@
 @import '../../core/style/variables';
-
-body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-
-  // Helps fonts on OSX looks more consistent with other systems
-  // Isn't currently in button styles due to performance concerns
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .mat-sidenav {
-    min-width: 300px;
-
-    .mat-button {
-      width: 100%;
-      position: relative;
-      bottom: 0;
-      margin: 24px 0;
-    }
-  }
-
-  .mat-toolbar {
-    .mat-icon {
-      cursor: pointer;
-    }
-
-    .demo-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-  }
-
-}
-
+// 头部
 .m-header {
   position: fixed;
   z-index: 1;
   box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
-// stretch to screen size in fullscreen mode
-.demo-content {
+
+.mat-toolbar {
+  .mat-icon {
+    cursor: pointer;
+  }
+
+  .demo-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+}
+// 侧滑
+.mat-sidenav {
+  min-width: 300px;
+
+  .mat-button {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    margin: 24px 0;
+  }
+}
+.slide-button {
+  padding: 0 24px!important;
+}
+
+// 内容
+.m-content-list {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -52,7 +44,6 @@ body {
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-
 
   display: flex;
   flex-wrap: wrap;
@@ -74,11 +65,9 @@ body {
     }
   }
 }
-.slide-button {
-  padding: 0 24px!important;
-}
-// 列表底部文字
-.end-text {
+
+// 空内容
+.empty-text {
   text-align: center;
   display: flex;
 
@@ -88,8 +77,10 @@ body {
   height: 100%;
   min-height: 84px;
 }
+
+// 手机布局
 @media ($mat-xsmall) {
-  .demo-content {
+  .m-content-list {
     .mat-card {
       width: 100%;
       margin-right: 0;

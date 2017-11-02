@@ -1,63 +1,65 @@
 <mat-sidenav-container class="demo-root" fullscreen >
-  <!-- 头部 -->
+  <!-- 头部开始 -->
   <mat-toolbar color="primary" class='m-header'>
-
+    <!-- 侧滑按钮 -->
     <button mat-icon-button class="m-menu" (click)="start.open('mouse')">
       <mat-icon>menu</mat-icon>
     </button>
-
+    <!-- 标题 -->
+    <h1>ShengYin</h1>
+    <!-- 工具按钮 -->
     <div class="demo-toolbar">
-      <h1>Sheng</h1>
-      <div>
-        <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
-          <mat-icon>fullscreen</mat-icon>
+      <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+      <!-- 更多开始 -->
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="refresh()">刷新</button>
+        <button mat-menu-item (click)="toggleTheme()">{{dark ? '日间' : '夜间'}} 主题</button>
+        <button mat-menu-item (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
+          {{root.dir.toUpperCase()}}
         </button>
-
-        <!-- 更多开始 -->
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="refresh()">刷新</button>
-          <button mat-menu-item (click)="toggleTheme()">{{dark ? 'Light' : 'Dark'}} 主题</button>
-          <button mat-menu-item (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
-            {{root.dir.toUpperCase()}}
-          </button>
-        </mat-menu>
-        <!-- 更多结束 -->
-
-      </div>
+      </mat-menu>
+      <!-- 更多结束 -->
     </div>
 
   </mat-toolbar>
-  <!-- nav slide, push, over-->
+  <!-- 头部结束 -->
+
+  <!-- 侧滑开始 -->
+  <!-- mode支持slide, push, over等模式-->
   <mat-sidenav #start [mode]="'push'">
-    <!-- 侧边头部 -->
     <mat-card>
+      <!-- 侧边头部 -->
       <mat-card-header>
         <img mat-card-avatar src="../../../assets/avatar.jpeg">
-        <!-- <mat-card-title>最光阴</mat-card-title> -->
-        <!-- <mat-card-subtitle>蹉跎错，消磨过，最是光阴化浮沫</mat-card-subtitle> -->
       </mat-card-header>
-      <!-- <img mat-card-image src="https://material.angularjs.org/latest/img/washedout.png"> -->
+
       <mat-card-content>
-        <div style="margin-top: 10px"></div>
       <pre>
-      笑看嫣红染半山
+  <!-- 笑看嫣红染半山
 
       逐风万里白云间
 
       逍遥此生不为客
 
-      天地三才任平凡
+      天地三才任平凡 -->
+      夜山秋雨滴空廊
+
+      灯照堂前树叶光
+
+      对坐读书终卷后
+
+      自披衣被扫僧房
       </pre>
       </mat-card-content>
     </mat-card>
-    <div style="margin-top: 16px"></div>
-    <!-- 分类 -->
-
+    <!-- 分类开始 -->
     <button mat-menu-item class="slide-button" (click)="refresh();start.close()">全部</button>
-
+    
     <mat-expansion-panel *ngFor="let category of categories" [hideToggle]="hideToggle">
       <mat-expansion-panel-header>{{category.name}}</mat-expansion-panel-header>
       <mat-nav-list>
@@ -70,15 +72,20 @@
     </mat-expansion-panel>
 
     <button mat-button tabindex="-1" (click)="start.close()">关闭</button>
+    <!-- 分类结束 -->
   
   </mat-sidenav>
 
-  <div>
-    <div #root="dir" dir="ltr" class="demo-content">
+  <div  class="m-content">
+
+
+    <div #root="dir" dir="ltr" class="m-content-list">
+      <!-- 链接形式的路由导航 下面是两种形式 暂时不采用 -->
       <!-- <mat-card *ngFor='let article of articles' [routerLink]="['detail', article.id]"> -->
+      <!-- <a [routerLink]="[ '',{ outlets: { blogDetail: ['blogDetail'] } } ]">blogDetail</a> -->
       <mat-card *ngFor='let article of articles' (click)='toBlogDetail(article.id)'>
         <mat-card-title>{{article.title}}</mat-card-title>
-        <mat-card-subtitle>{{article.created_at|date:'y.mm.dd'}}</mat-card-subtitle>
+        <mat-card-subtitle>{{article.created_at}}</mat-card-subtitle>
         <mat-card-content>
           <mat-chip-list>
             <mat-chip *ngFor="let item of article.tag">{{item}}</mat-chip>
@@ -87,13 +94,15 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-button >MORE</button>
-          <!-- <button mat-button>SHARE</button> -->
         </mat-card-actions>
-        <mat-card-footer>
-        </mat-card-footer>
+        <!-- <mat-card-footer>
+        </mat-card-footer> -->
       </mat-card>
     </div>
+
     <infinite-scroll #infinite loadingText="加载更多" (infinite)="doInfinite($event)"></infinite-scroll>
-    <div *ngIf='endList' class="end-text">没有更多内容</div>
+ 
+    <div *ngIf='empty' class="empty-text">没有更多内容</div>
   </div>
+
 </mat-sidenav-container>

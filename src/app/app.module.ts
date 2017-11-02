@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import { HttpModule }    from '@angular/http';
+import { FormsModule }    from '@angular/forms';
 
 import { MatToolbarModule } from './components/toolbar';
 import { MatButtonModule } from './components/button';
@@ -21,6 +22,8 @@ import { SlidesComponent } from './pages/slides/slides.component';
 import { AppInfiniteComponent } from './components/app-infinite/app-infinite.component';
 import { AppRefresherComponent } from './components/app-refresher/app-refresher.component';
 import { Refresher } from './components/app-refresher/refresher';
+import { ComposeMessageComponent } from './pages/compose-message/compose-message.component';
+import { SwitchComponent } from './pages/switch/switch.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +35,15 @@ import { Refresher } from './components/app-refresher/refresher';
     SlidesComponent,
     AppInfiniteComponent,
     AppRefresherComponent,
-    Refresher
+    Refresher,
+    ComposeMessageComponent,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
