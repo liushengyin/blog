@@ -7,7 +7,7 @@
       <mat-toolbar color="primary" >
 
         <button mat-icon-button class="m-menu" (click)="goBack()">
-          <mat-icon>arrow_back</mat-icon>
+        <span class="arrow_back"></span>
         </button>
 
         <div class="m-toolbar">
@@ -56,14 +56,14 @@
     <div class='m-footer mat-primary'>
       <a *ngIf="pre" class="m-footer-section-left" (click)="toPrevious()">
         <div class="direction">previous</div>
-        <mat-icon>arrow_back</mat-icon>
+        <span class="arrow_back"></span>
         <span>{{pre.title}}</span>
       </a>
       
       <a *ngIf="next" class="m-footer-section-right" (click)="toNext()">
         <div class="direction">next</div>
         <span>{{next.title}}</span>
-        <mat-icon>arrow_forward</mat-icon>
+        <span class="arrow_forward"></span>
       </a>
     </div>
   </footer>

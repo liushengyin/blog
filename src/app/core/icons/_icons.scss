@@ -1,0 +1,32 @@
+@mixin svg-icons {
+  display: inline-block;
+  background-position: center;
+  height: 24px;
+  width: 24px;
+}
+
+.menu {
+  @include svg-icons;
+  background: url("assets/icons/ic_menu_white.svg");
+}
+
+.fullscreen {
+  @include svg-icons;
+  background: url("assets/icons/ic_fullscreen_white.svg");
+}
+
+.more_vert {
+  @include svg-icons;
+  background: url("assets/icons/ic_more_vert_white.svg");
+}
+
+.arrow_back {
+  @include svg-icons;
+  background: url("assets/icons/ic_arrow_back_white.svg");
+}
+
+.arrow_forward {
+  @include svg-icons;
+  background: url("assets/icons/ic_arrow_forward_white.svg");
+}
+
