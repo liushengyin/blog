@@ -9,26 +9,22 @@ import { slideInDownAnimation }   from '../../../animations';
   selector: 'app-blog-detail',
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.scss'],
-  // encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None,
   animations: [ slideInDownAnimation ]
 })
 export class BlogDetailComponent implements OnInit {
-  // @HostBinding('@routeAnimation') routeAnimation = true;
-  // @HostBinding('style.display')   display = 'block';
-  // @HostBinding('style.position')  position = 'absolute';
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   @ViewChild("header") header: ElementRef
   @ViewChild("topBar") topBar: ElementRef
   @ViewChild("middleBar") middleBar: ElementRef
   @ViewChild("bottomBar") bottomBar: ElementRef
-  // @ViewChild("content") content: ElementRef
   @ViewChild("article") article: ElementRef
 
   id = '';
   categoryId ;
   scheduledAnimationFrame = false;
   toolbarHeight = 64;
-  baseUrl = 'http://www.liushengyin.com/api/';
 
   blogDetail = {
     id:'',
@@ -37,6 +33,7 @@ export class BlogDetailComponent implements OnInit {
     abstract:'',
     body:''
   };
+  
   pre = null;
   next = null;
   touchEvent = {
@@ -45,21 +42,16 @@ export class BlogDetailComponent implements OnInit {
     timeStamp:0
   };
 
+  spinner = true;
+
   constructor( private route: ActivatedRoute,
                private location: Location,
                private renderer: Renderer,
                private router: Router,
                public data: Data) { }
-  items = [
-    {text: 'Refresh'},
-    {text: 'Settings'},
-    {text: 'Help', disabled: true},
-    {text: 'Sign Out'}
-  ];
-  ngOnInit() {
 
-   this.route.paramMap.subscribe((params: ParamMap) => {
-   });
+
+  ngOnInit() {
 
     this.route
          .queryParamMap
@@ -74,9 +66,9 @@ export class BlogDetailComponent implements OnInit {
   getData() {
     if(!this.id) return;
 
-    let url = new URL(`article/${this.id}`,this.baseUrl);
+    let url = `article/${this.id}`;
     if(this.categoryId != 0) {
-      url.searchParams.append("categoryId", this.categoryId);
+      url = url + `?categoryId=${this.categoryId}`;
     }
 
     this.data.get(url)
@@ -87,6 +79,9 @@ export class BlogDetailComponent implements OnInit {
   }
   // 处理博客列表数据
   handleData(data){
+
+    this.spinner = false;
+
     this.blogDetail = data.results;
     this.article.nativeElement.innerHTML = this.blogDetail.body;
     this.pre = data.pre;
@@ -95,49 +90,39 @@ export class BlogDetailComponent implements OnInit {
   
   // 错误处理
   handleError(error){
+      this.spinner = false;
       console.log(error);
   }
+  // 上一篇文章
   toPrevious(){
 
     if(!this.pre)return;
 
     this.id = this.pre.id;
     this.getData();
-
+    window.scroll(0,0);
   }
+  // 下一篇文章
   toNext(){
 
     if(!this.next) return;
 
     this.id = this.next.id;
     this.getData();
+     window.scroll(0,0);
   }
+  // 返回
   goBack(): void {
-    this.closePopup();
+    this.router.navigate(['',{ outlets: { blogDetail: null }}]);
     // this.location.back();
   }
-  closePopup() {
-    // Providing a `null` value to the named outlet
-    // clears the contents of the named outlet
-    this.router.navigate(['',{ outlets: { blogDetail: null }}]);
-  }
 
-  share() {
-    if ((<any>navigator).share) {
-      (<any>navigator).share({
-          title: 'Web Fundamentals',
-          text: 'Check out Web Fundamentals — it rocks!',
-          url: 'https://developers.google.com/web',
-      })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error sharing', error));
-    }
-  }
   ngAfterViewInit() {
     this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
     document.addEventListener('touchstart',this._touchStart.bind(this), false);
     document.addEventListener('touchend',this._touchEnd.bind(this), false);
   }
+
   _touchStart(ev) {
     this.touchEvent.clientX = ev.touches[0].clientX;
     this.touchEvent.clientY = ev.touches[0].clientY;
@@ -155,9 +140,10 @@ export class BlogDetailComponent implements OnInit {
     if(recognize.swip) {
       console.log(recognize.direction)
       if(recognize.direction == 'left') {
-        this.toNext();
+        // this.toNext();
       } else {
-        this.toPrevious()
+        this.goBack();
+        // this.toPrevious()
       }
     }
   }
@@ -168,19 +154,16 @@ export class BlogDetailComponent implements OnInit {
     let deltT = endEvent.timeStamp - startEvent.timeStamp;
     let recognize = {
        direction: deltX > 0 ? 'right':'left',
-       swip:( Math.abs(deltX) > 120 ) && ( Math.abs(deltY) < 20 ) && ( deltT < 300)
+       swip:( Math.abs(deltX) > 100 ) && ( Math.abs(deltY) < 20 ) && ( deltT < 500)
      }
     return recognize;
   }
 
-  onSwipe(event){
-    console.log(event);
-  }
 
   @HostListener("window:scroll", ["$event"])
   onWindowScroll(ev) {
     let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    console.log(number)
+    console.log(number,window.pageYOffset,document.documentElement.scrollTop ,document.body.scrollTop);
     if (number > this.toolbarHeight*3)
     if (this.scheduledAnimationFrame)
         return;
@@ -192,6 +175,7 @@ export class BlogDetailComponent implements OnInit {
   onWindowResize(event) {
       this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
   }
+
   updatePage(number){
     this.scheduledAnimationFrame = false;
     let headerHeight = this.toolbarHeight*2;
@@ -202,8 +186,7 @@ export class BlogDetailComponent implements OnInit {
     } else {
       this.middleBar.nativeElement.style.width = `100%`;
     }
-
-    // this.renderer.setElementStyle(this.topBar.nativeElement, 'transform', 'translate3d(0px, 100px, 0px)');
+    this.renderer.setElementStyle(this.topBar.nativeElement, 'transform', 'translate3d(0px, 100px, 0px)');
     this.header.nativeElement.style.boxShadow = `0 2px 5px rgba(0,0,0,${.26*number/headerHeight})`
     this.header.nativeElement.style.transform = `translate3d(0px, -${number}px, 0px)`
     this.topBar.nativeElement.style.transform = `translate3d(0px, ${number}px, 0px)`

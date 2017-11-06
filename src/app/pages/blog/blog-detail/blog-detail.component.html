@@ -1,56 +1,70 @@
 <div class="blog-detail">
+
   <!-- 头部 -->
-  <header class='m-header' #header>
+  <header class='m-header mat-primary' #header>
+    <!-- top 条 -->
     <div #topBar>
       <mat-toolbar color="primary" >
+
         <button mat-icon-button class="m-menu" (click)="goBack()">
           <mat-icon>arrow_back</mat-icon>
         </button>
-        <div class="demo-toolbar">
-          <!-- <h1> Material</h1> -->
-          <span></span>
-          <div>
-            <button mat-button> theme</button>
-            <button mat-icon-button (click)="share()" title="Toggle fullscreen">
+
+        <div class="m-toolbar">
+            <!-- <button mat-button> theme</button> -->
+<!--             <button mat-icon-button (click)="share()" title="Toggle fullscreen">
               <mat-icon>share</mat-icon>
-            </button>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
+            </button> -->
+<!--             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item *ngFor="let item of items" (click)="select(item.text)" [disabled]="item.disabled">
                 {{ item.text }}
               </button>
-            </mat-menu>
-          </div>
+            </mat-menu> -->
         </div>
       </mat-toolbar>
     </div>
+    <!-- middle 条 -->
     <div #middleBar class="middleBar">
       {{blogDetail.title}}
     </div>
+    <!-- bottom 条 -->
     <div #bottomBar class="bottomBar">
       {{blogDetail.abstract}}
     </div>
   </header>
+
+  <div class="m-spinner" *ngIf="spinner">
+    <div class="spinner-crescent">
+        <svg viewBox="0 0 64 64">
+            <circle transform="translate(32,32)" r="26"></circle>
+        </svg>
+    </div>
+  </div>
+
   <!-- 内容 -->
   <article #article class="m-article">
-    
+
   </article>
+
+
+
   <!-- 底部 -->
   <footer>
-    <div class='m-footer'>
+    <div class='m-footer mat-primary'>
       <a *ngIf="pre" class="m-footer-section-left" (click)="toPrevious()">
         <div class="direction">previous</div>
         <mat-icon>arrow_back</mat-icon>
         <span>{{pre.title}}</span>
       </a>
+      
       <a *ngIf="next" class="m-footer-section-right" (click)="toNext()">
         <div class="direction">next</div>
         <span>{{next.title}}</span>
         <mat-icon>arrow_forward</mat-icon>
       </a>
-
     </div>
   </footer>
 </div>

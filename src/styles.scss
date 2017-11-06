@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/_theming.scss';
 // Plus imports for other components in your app.
-
+@import './app/pages/blog/blog-detail/blog-detail-theme';
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // **Be sure that you only ever include this mixin once!**
@@ -14,6 +14,7 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Include the default theme styles.
 @include angular-material-theme($candy-app-theme);
+@include mat-blog-detail-theme($candy-app-theme);
 
 
 // Define an alternate dark theme.
@@ -27,6 +28,7 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .unicorn-dark-theme {
   @include angular-material-theme($dark-theme);
+  @include mat-blog-detail-theme($dark-theme);
 }
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
@@ -49,10 +51,21 @@ html, body {
 }
 * { box-sizing: border-box; }
 img,embed,object,video {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .m-article {
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 
+.mat-toolbar {
+  .mat-icon {
+    cursor: pointer;
+  }
+  .m-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+}

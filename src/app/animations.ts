@@ -6,20 +6,19 @@ export const slideInDownAnimation: AnimationEntryMetadata =
     state('*',
       style({
         opacity: 1,
-        transform: 'translateX(0)'
       })
     ),
     transition(':enter', [
       style({
         opacity: 0,
-        transform: 'translateX(-100%)'
+        transform: 'translateX(100%)'
       }),
-      animate('0.2s ease-in')
+      animate('400ms cubic-bezier(.35,0,.25,1)')
     ]),
     transition(':leave', [
-      animate('0.5s ease-out', style({
+      animate('400ms cubic-bezier(.35,0,.25,1)', style({
         opacity: 0,
-        transform: 'translateY(100%)'
+        transform: 'translateX(100%)'
       }))
     ])
   ]);

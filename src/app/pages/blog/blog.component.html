@@ -1,4 +1,4 @@
-<mat-sidenav-container class="demo-root" fullscreen >
+<mat-sidenav-container class="m-root" fullscreen >
   <!-- 头部开始 -->
   <mat-toolbar color="primary" class='m-header'>
     <!-- 侧滑按钮 -->
@@ -8,7 +8,7 @@
     <!-- 标题 -->
     <h1>ShengYin</h1>
     <!-- 工具按钮 -->
-    <div class="demo-toolbar">
+    <div class="m-toolbar">
       <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
         <mat-icon>fullscreen</mat-icon>
       </button>
@@ -18,10 +18,11 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="refresh()">刷新</button>
-        <button mat-menu-item (click)="toggleTheme()">{{dark ? '日间' : '夜间'}} 主题</button>
-        <button mat-menu-item (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
+        <a mat-menu-item href="mailto:shengyinliu@outlook.com">Email</a>
+        <button mat-menu-item (click)="toggleTheme()">{{dark ? '日间' : '夜间'}}主题</button>
+<!--         <button mat-menu-item (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
           {{root.dir.toUpperCase()}}
-        </button>
+        </button> -->
       </mat-menu>
       <!-- 更多结束 -->
     </div>

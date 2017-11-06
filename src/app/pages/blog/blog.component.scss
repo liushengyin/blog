@@ -6,21 +6,9 @@
   box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
 
-.mat-toolbar {
-  .mat-icon {
-    cursor: pointer;
-  }
-
-  .demo-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-  }
-}
 // 侧滑
 .mat-sidenav {
-  min-width: 300px;
+  min-width: 300px!important;
 
   .mat-button {
     width: 100%;

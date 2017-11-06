@@ -1,15 +1,16 @@
 // @import '../../../core/style/variables';
 @import '../../../components/toolbar/toolbar';
-// :host { 
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   z-index: 3;
-//   background: white;
-// }
+// @import './blog-detail-theme';
 
+:host { 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: white;
+}
 
 .blog-detail {
   top: 0;
@@ -19,29 +20,48 @@
   position: absolute;
   z-index: 2;
   background: white;
-  // background-color: #fafafa;
 }
-
-.mat-toolbar {
-    .mat-icon {
-      cursor: pointer;
-    }
-    .demo-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-}
-
+// 头部
 .m-header {
   position: fixed;
   z-index: 1;
   width: 100%;
-  background: #3f51b5;
-  color: rgba(255, 255, 255, 0.87);
+
+}
+@mixin toolbar-height($height) {
+  .middleBar,.bottomBar {
+    height: $height;
+    line-height: $height;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    align-items: center;
+  }
+  .m-header {
+    height: calc(#{$height} * 3);
+  }
+  .m-article {
+    margin-top: calc(#{$height} * 3);
+  }
 }
 
+.middleBar {
+  margin: 0 16px 0 56px;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-font-smoothing: antialiased;
+}
+.bottomBar {
+  // margin-left: 40px;
+  padding: 0 16px;
+  font-family: 400 16px/24px 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+@include toolbar-height($mat-toolbar-height-desktop);
+
+// 文章
 .m-article {
   box-sizing: border-box;
   width: 100%;
@@ -50,14 +70,15 @@
   min-height: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: calc(56px * 3);
+  margin-top: calc($mat-toolbar-height-desktop * 3);
 }
+// 底部
 .m-footer {
   width: 100%;
   height: 96px;
-  background: #3f51b5;
-  color: rgba(255, 255, 255, 0.87);
+
 }
+
 @mixin footer-section {
   font-size: 20px;
   font-weight: 500;
@@ -103,40 +124,6 @@
   color: rgba(255,255,255,0.55);
 }
 
-
-@mixin toolbar-height($height) {
-  .middleBar,.bottomBar {
-    height: $height;
-    line-height: $height;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    align-items: center;
-  }
-  .m-header {
-    height: calc(#{$height} * 3);
-  }
-  .m-article {
-    margin-top: calc(#{$height} * 3);
-  }
-}
-
-.middleBar {
-  margin: 0 16px 0 56px;
-  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -webkit-font-smoothing: antialiased;
-}
-.bottomBar {
-  // margin-left: 40px;
-  padding: 0 16px;
-  font-family: 400 16px/24px 'Roboto', 'Noto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-@include toolbar-height($mat-toolbar-height-desktop);
-
 @media ($mat-xsmall) {
   @include toolbar-height($mat-toolbar-height-mobile-portrait);
   .m-footer-section-left:hover, .m-footer-section-right:hover{
@@ -145,5 +132,38 @@
   .m-footer-section-left:active, .m-footer-section-right:active{
     background-color: rgba(0, 0, 0, 0.12);
   }
+}
 
+.spinner-crescent{
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  svg{
+    animation-duration: 750ms;
+    animation: spinner-rotate 1s linear infinite;
+    stroke: #000;
+  }
+  circle {
+    fill: transparent;
+    stroke-width: 4px;
+    stroke-dasharray: 128px;
+    stroke-dashoffset: 82px;
+    transition: background-color .2s linear;
+  }
+  @keyframes spinner-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+.m-spinner {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  svg {
+    stroke: rgba(0,0,0,0.54);
+  }
 }
