@@ -9,7 +9,8 @@
   left: 0;
   right: 0;
   z-index: 3;
-  background: white;
+  overflow: auto;
+  &::-webkit-scrollbar {display:none}
 }
 
 .blog-detail {
@@ -19,7 +20,6 @@
   bottom: 0;
   position: absolute;
   z-index: 2;
-  background: white;
 }
 // 头部
 .m-header {
@@ -55,7 +55,7 @@
 }
 .bottomBar {
   // margin-left: 40px;
-  padding: 0 16px;
+  padding: 0 32px;
   font-family: 400 16px/24px 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
 }

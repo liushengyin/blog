@@ -47,6 +47,7 @@ export class BlogDetailComponent implements OnInit {
   constructor( private route: ActivatedRoute,
                private location: Location,
                private renderer: Renderer,
+               private _element: ElementRef,
                private router: Router,
                public data: Data) { }
 
@@ -100,7 +101,7 @@ export class BlogDetailComponent implements OnInit {
 
     this.id = this.pre.id;
     this.getData();
-    window.scroll(0,0);
+    this._element.nativeElement.scroll(0,0);
   }
   // 下一篇文章
   toNext(){
@@ -109,7 +110,7 @@ export class BlogDetailComponent implements OnInit {
 
     this.id = this.next.id;
     this.getData();
-     window.scroll(0,0);
+    this._element.nativeElement.scroll(0,0);
   }
   // 返回
   goBack(): void {
@@ -138,7 +139,6 @@ export class BlogDetailComponent implements OnInit {
 
     let recognize = this.isSwipe(this.touchEvent,newEvent);
     if(recognize.swip) {
-      console.log(recognize.direction)
       if(recognize.direction == 'left') {
         // this.toNext();
       } else {
@@ -160,15 +160,15 @@ export class BlogDetailComponent implements OnInit {
   }
 
 
-  @HostListener("window:scroll", ["$event"])
+  @HostListener("scroll", ["$event"])
   onWindowScroll(ev) {
-    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    console.log(number,window.pageYOffset,document.documentElement.scrollTop ,document.body.scrollTop);
-    if (number > this.toolbarHeight*3)
-    if (this.scheduledAnimationFrame)
-        return;
-      this.scheduledAnimationFrame = true;
-      requestAnimationFrame(this.updatePage.bind(this, number));
+    // let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    let number = -document.querySelector('.blog-detail').getBoundingClientRect().top;
+
+    if (this.scheduledAnimationFrame) return;
+
+    this.scheduledAnimationFrame = true;
+    requestAnimationFrame(this.updatePage.bind(this, number));
   }
 
   @HostListener("window:resize")

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {
   MatAutocompleteModule,
-  // MatButtonModule,
+  MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
@@ -11,7 +11,7 @@ import {
   MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
-  // MatIconModule,
+  MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
@@ -47,7 +47,7 @@ import {PortalModule} from '@angular/cdk/portal';
 @NgModule({
   exports: [
     MatAutocompleteModule,
-    // MatButtonModule,
+    MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
@@ -58,7 +58,7 @@ import {PortalModule} from '@angular/cdk/portal';
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
-    // MatIconModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,

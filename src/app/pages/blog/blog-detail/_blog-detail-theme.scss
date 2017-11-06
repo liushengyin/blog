@@ -30,7 +30,7 @@
       @include _mat-blog-detail-color($warn);
     }
   }
-  .m-article {
+  .blog-detail,.m-article {
     background: mat-color($background, background);
     color: mat-color($foreground, text);
   }

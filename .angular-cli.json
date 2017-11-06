@@ -9,10 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico",
-        "manifest.json",
-        "service-worker.js",
-        "sw-toolbox.js"
+        "favicon.png",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",

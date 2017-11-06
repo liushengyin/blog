@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ShengYin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Sheng Blog">
+  <link rel="icon" sizes="192x192" href="./assets/icons/icon-192x192.png">
+
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Sheng Blog">
+  <link rel="apple-touch-icon" href="./assets/icons/icon-152x152.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="./assets/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#2F3BA2">
+
+  <base href="/">
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(){console.log('service worker installed')})
+        .catch(function(err) {console.log('Error', err)});
+    }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>

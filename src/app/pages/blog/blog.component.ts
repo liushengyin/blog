@@ -22,8 +22,6 @@ export class BlogComponent implements OnInit {
   next_page = 1;
   empty = false;
 
-  baseUrl = 'http://www.liushengyin.com/api/';
-
   constructor(
     public data:Data,
     private router:Router,
@@ -38,6 +36,27 @@ export class BlogComponent implements OnInit {
   ngAfterViewInit() {
     // 监听元素滚动事件，TODO 解决方案不是太好
     this._element.nativeElement.querySelector('.mat-drawer-content').onscroll = this.infinite.onWindowScroll.bind(this.infinite);
+    this.moveAvart();
+  }
+  moveAvart(){
+     let avart = this._element.nativeElement.querySelector("#avatar");
+     let src = '../../../assets/kitten-small.png';
+     let count = 0;
+     setInterval(()=>{
+       switch (count) {
+         case 0:
+           src = '../../../assets/kitten-small.png';
+           break;
+         case 1:
+           src = '../../../assets/kitten-medium.png';
+           break;
+         case 2:
+           src = '../../../assets/kitten-large.png';
+           break;
+       }
+       avart.src = src;
+       count = count==3 ? 0:count+1;
+     },4000)
   }
 
   // 获取数据
@@ -171,7 +190,8 @@ export class BlogComponent implements OnInit {
 
   // 切换全屏状态
   toggleFullscreen() {
-    let elem = this._element.nativeElement.querySelector('.demo-root');
+    // let elem = this._element.nativeElement.querySelector('.m-root');
+    let elem:any = document.querySelector('#app');
 
     if (!isDocumentInFullScreenMode()) {
         if (elem.requestFullscreen) {

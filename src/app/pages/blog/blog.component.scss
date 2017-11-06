@@ -1,4 +1,7 @@
 @import '../../core/style/variables';
+.mat-drawer-content {
+  &::-webkit-scrollbar {display:none}
+}
 // 头部
 .m-header {
   position: fixed;
@@ -19,6 +22,11 @@
 }
 .slide-button {
   padding: 0 24px!important;
+}
+#avatar {
+  max-width: 100%;
+  width: auto;
+  height: 48px;
 }
 
 // 内容

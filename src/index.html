@@ -28,16 +28,9 @@
 
   <base href="/">
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(function(){console.log('service worker installed')})
-        .catch(function(err) {console.log('Error', err)});
-    }
-  </script>
 </head>
 <body>
   <app-root></app-root>

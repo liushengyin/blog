@@ -1,7 +1,7 @@
 import { Component ,ViewEncapsulation} from '@angular/core';
 import 'hammerjs';
 import {trigger, AnimationMetadata, keyframes, animate, style, group, animateChild, query, stagger, transition} from '@angular/animations';
-import {routerAnimations} from './routerAnimations';
+// import {routerAnimations} from './routerAnimations';
 
 // export const routerAnimations: AnimationMetadata = trigger('routerAnimations', [
 //       transition('blog => slides', [
@@ -69,16 +69,16 @@ import {routerAnimations} from './routerAnimations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
-  animations: [
-    routerAnimations
-  ]
+  // animations: [
+  //   routerAnimations
+  // ]
 
 })
 export class AppComponent {
-  title = 'app';
-  prepareRouteTransition(outlet) {
-    const animation = outlet.activatedRouteData['animation'] || {};
-    return animation['value'] || null;
-  }
+  // title = 'app';
+  // prepareRouteTransition(outlet) {
+  //   const animation = outlet.activatedRouteData['animation'] || {};
+  //   return animation['value'] || null;
+  // }
 }
 

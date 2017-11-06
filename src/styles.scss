@@ -16,6 +16,10 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 @include angular-material-theme($candy-app-theme);
 @include mat-blog-detail-theme($candy-app-theme);
 
+body {
+  background: mat-color(map-get($candy-app-theme, background), background);
+  color: mat-color(map-get($candy-app-theme, foreground), text);
+}
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
@@ -30,7 +34,14 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   @include angular-material-theme($dark-theme);
   @include mat-blog-detail-theme($dark-theme);
 }
+body.unicorn-dark-theme {
+  background: mat-color(map-get($dark-theme, background), background);
+  color: mat-color(map-get($dark-theme, foreground), text);
+}
+
+
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 
 html, body {
   margin: 0;

@@ -4,28 +4,26 @@
     padding-top: 36px;
     flex-wrap: wrap;
 }
-.content {
-    width: 100%;
-    text-align: center;
-    padding-top: 16px;
-}
 .tab-logo {
-    background: url("../../../assets/tablogo.png");
-    background-position: 0 0;
-    height: 60px;
-    width: 180px;
-
     display: inline-block;
     overflow: hidden;
     vertical-align: top;
-    font-size: 12px;
     word-spacing: normal;
     letter-spacing: normal;
+    font-size: 56px;
+    text-decoration: none;
+    color: rgba(0,0,0,0.54);
+}
+.content {
+    width: 100%;
+    padding-top: 16px;
+    font-size: 24px;
+    text-align: center;
+    color: rgba(0,0,0,0.38);
 }
 .not_found_bg {
-    position: fixed;
-    bottom: 0;
-    height: 222px;
+    position: absolute;
+    bottom: 20%;
     width: 100%;
-    background: url("../../../assets/404_bg.png");
+    text-align: center;
 }

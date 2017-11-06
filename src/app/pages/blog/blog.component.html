@@ -18,8 +18,8 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="refresh()">刷新</button>
+        <button mat-menu-item (click)="toggleTheme()">{{dark ? '日间' : '夜间'}}</button>
         <a mat-menu-item href="mailto:shengyinliu@outlook.com">Email</a>
-        <button mat-menu-item (click)="toggleTheme()">{{dark ? '日间' : '夜间'}}主题</button>
 <!--         <button mat-menu-item (click)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" title="Toggle between RTL and LTR">
           {{root.dir.toUpperCase()}}
         </button> -->
@@ -36,7 +36,7 @@
     <mat-card>
       <!-- 侧边头部 -->
       <mat-card-header>
-        <img mat-card-avatar src="../../../assets/avatar.jpeg">
+        <img mat-card-avatar id='avatar' src="../../../assets/kitten-small.png">
       </mat-card-header>
 
       <mat-card-content>
