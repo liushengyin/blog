@@ -10,13 +10,13 @@ export const slideInDownAnimation: AnimationEntryMetadata =
     ),
     transition(':enter', [
       style({
-        opacity: 0,
+        // opacity: 0,
         transform: 'translateX(100%)'
       }),
-      animate('400ms cubic-bezier(.35,0,.25,1)')
+      animate('200ms ease')
     ]),
     transition(':leave', [
-      animate('400ms cubic-bezier(.35,0,.25,1)', style({
+      animate('200ms ease-out', style({
         opacity: 0,
         transform: 'translateX(100%)'
       }))

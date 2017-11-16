@@ -16,6 +16,7 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Include the default theme styles.
 @include angular-material-theme($candy-app-theme);
+
 @include mat-blog-detail-theme($candy-app-theme);
 
 body {
@@ -34,6 +35,7 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .unicorn-dark-theme {
   @include angular-material-theme($dark-theme);
+  
   @include mat-blog-detail-theme($dark-theme);
 }
 body.unicorn-dark-theme {

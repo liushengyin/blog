@@ -1,8 +1,7 @@
 import { Component,ViewEncapsulation, HostListener,OnInit ,HostBinding, ViewChild, ElementRef, Renderer2} from '@angular/core';
-import { AppDrawerComponent } from '../../components/app-drawer/app-drawer.component'
+// import { AppDrawerComponent } from '../../components/app-drawer/app-drawer.component'
 import { Location }                 from '@angular/common';
 import {query, stagger, animate, style, transition, trigger} from '@angular/animations';
-
 
 @Component({
   selector: 'app-slides',

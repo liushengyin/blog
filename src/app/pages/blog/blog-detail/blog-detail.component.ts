@@ -120,8 +120,9 @@ export class BlogDetailComponent implements OnInit {
 
   ngAfterViewInit() {
     this.toolbarHeight = this.middleBar.nativeElement.offsetHeight;
-    document.addEventListener('touchstart',this._touchStart.bind(this), false);
-    document.addEventListener('touchend',this._touchEnd.bind(this), false);
+    // 可能造成性能问题
+    // document.addEventListener('touchstart',this._touchStart.bind(this), false);
+    // document.addEventListener('touchend',this._touchEnd.bind(this), false);
   }
 
   _touchStart(ev) {

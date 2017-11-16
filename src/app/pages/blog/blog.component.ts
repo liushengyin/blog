@@ -192,6 +192,7 @@ export class BlogComponent implements OnInit {
   toggleFullscreen() {
     // let elem = this._element.nativeElement.querySelector('.m-root');
     let elem:any = document.querySelector('#app');
+    // let elem:any = document.body;
 
     if (!isDocumentInFullScreenMode()) {
         if (elem.requestFullscreen) {

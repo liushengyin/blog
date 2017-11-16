@@ -9,7 +9,7 @@
   left: 0;
   right: 0;
   z-index: 3;
-  overflow: auto;
+  overflow-y: scroll;
   &::-webkit-scrollbar {display:none}
 }
 
@@ -56,6 +56,7 @@
 .bottomBar {
   // margin-left: 40px;
   padding: 0 32px;
+  line-height: normal!important;
   font-family: 400 16px/24px 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
 }

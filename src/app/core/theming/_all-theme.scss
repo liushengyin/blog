@@ -1,0 +1,10 @@
+// Import all the theming functionality.
+@import '../core';
+@import '../../toolbar/toolbar-theme';
+
+
+// Create a theme.
+@mixin angular-material-theme($theme) {
+  @include mat-core-theme($theme);
+  @include mat-toolbar-theme($theme);
+}
