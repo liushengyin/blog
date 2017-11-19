@@ -2,7 +2,7 @@
   <!-- 头部开始 -->
   <mat-toolbar color="primary" class='m-header'>
     <!-- 侧滑按钮 -->
-    <button mat-icon-button class="m-menu" (click)="start.open('mouse')">
+    <button mat-icon-button (click)="start.open('mouse')">
       <!-- <mat-icon>menu</mat-icon> -->
       <span class="menu"></span>
     </button>
@@ -10,9 +10,9 @@
     <h1>ShengYin</h1>
     <!-- 工具按钮 -->
     <div class="m-toolbar">
-      <button mat-icon-button routerLink="/slides" title="Toggle fullscreen">
+<!--       <button mat-icon-button routerLink="/slides" title="Toggle fullscreen">
         <span class="fullscreen"></span>
-      </button>
+      </button> -->
       <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
         <span class="fullscreen"></span>
       </button>

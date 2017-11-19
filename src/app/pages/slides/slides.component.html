@@ -8,12 +8,12 @@
             (swipe)="onSwipe($event);swipeCount = swipeCount + 1;" -->
     <mat-toolbar color="primary" >
 
-    <button mat-icon-button class="m-menu" (click)="goBack()">
-      <mat-icon>arrow_back</mat-icon>
+    <button mat-icon-button (click)="goBack()">
+        <span class="arrow_back"></span>
     </button>
 
-    <button mat-icon-button class="m-menu" (click)="drawer.open()">
-      <mat-icon>menu</mat-icon>
+    <button mat-icon-button (click)="drawer.open()">
+      <span class="menu"></span>
     </button>
 
     </mat-toolbar>

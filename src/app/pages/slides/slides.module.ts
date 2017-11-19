@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ComponentsModule } from '../../components/components.module';
 import { SlidesComponent } from './slides.component';
-import { MatIconModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatListModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ComponentsModule,
-    MatIconModule,
+    MatButtonModule,
     MatListModule,
     RouterModule,
     RouterModule.forChild(routes)
