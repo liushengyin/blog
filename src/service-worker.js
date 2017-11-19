@@ -1,32 +1,82 @@
-/**
- * Check out https://googlechrome.github.io/sw-toolbox/docs/master/index.html for
- * more info on how to use sw-toolbox to custom configure your service worker.
- */
+var staticCacheName = 'sy-v1';
+var contentCache = 'content';
+var allCaches = [
+  staticCacheName,
+  contentCache
+];
+
+var urlsToCache = [
+  '/',
+  './inline.bundle.js',
+  './polyfills.bundle.js',
+  './styles.bundle.js',
+  './vendor.bundle.js',
+  './main.bundle.js',
+  'index.html',
+  '/assets/kitten-small.png',
+  '/assets/kitten-medium.png',
+  '/assets/kitten-large.png'
+];
+self.addEventListener('install', function(event) {
+
+  event.waitUntil(
+    caches.open(staticCacheName).then(function(cache){
+      return cache.addAll(urlsToCache);
+    })
+  );
+
+});
+
+self.addEventListener('activate', function(event) {
+
+  event.waitUntil(
+    caches.keys().then(function (cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName){
+          return cacheName.startsWith('SY-') && !allCaches.includes(cacheName);
+        }).map(function(cacheName){
+          return caches.delete(cacheName);
+        })
+      )
+    })
+  );
+
+});
+
+self.addEventListener('fetch', function(event) {
+  var requestUrl = new URL(event.request.url);
+
+  if (requestUrl.pathname.startsWith('/api/article/')) {
+      event.respondWith(serveBlog(event.request));
+      return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then(function(response){
+      return response || fetch(event.request);
+    })
+  );
+
+});
 
 
-'use strict';
-importScripts('./sw-toolbox.js');
+function serveBlog(request) {
+  var storageUrl = request.url;
 
-self.toolbox.options.cache = {
-  name: 'blog-cache'
-};
+  return caches.open(contentCache).then(function(cache) {
+    return cache.match(storageUrl).then(function(response) {
+      if (response) return response;
 
-// pre-cache our key assets
-self.toolbox.precache(
-  [
-    './inline.bundle.js',
-    './polyfills.bundle.js',
-    './styles.bundle.js',
-    './vendor.bundle.js',
-    './main.bundle.js',
-    'index.html',
-    'manifest.json'
-  ]
-);
+      return fetch(request).then(function(networkResponse) {
+        cache.put(storageUrl, networkResponse.clone());
+        return networkResponse;
+      });
+    });
+  });
+}
 
-// dynamically cache any other local assets
-self.toolbox.router.any('/*', self.toolbox.cacheFirst);
-
-// for any other requests go to the network, cache,
-// and then only use that cached resource if your user goes offline
-self.toolbox.router.default = self.toolbox.networkFirst;
+self.addEventListener('message', function(event) {
+  if (event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
+});

@@ -13,7 +13,8 @@ export class Data {
     public user = '';
     public companyName = '';
     // public userurl = "http://manager.liushengyin.net/api/";
-    public userurl = "https://www.liushengyin.com/api/";
+    // public userurl = "https://www.liushengyin.com/api/";
+    public userurl = "http://www.liushengyin.com/api/";
 
     public userName = '';
     public account = "";

@@ -10,6 +10,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppRoutingModule } from './app-routes';
 
 import { Data } from './providers/data';
+import { db } from './providers/db';
 
 import { AppComponent } from './app.component';
 import { BlogComponent } from './pages/blog/blog.component';
@@ -33,7 +34,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ComponentsModule,
     AppRoutingModule
   ],
-  providers: [Data],
+  providers: [Data,db],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

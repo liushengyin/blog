@@ -1,6 +1,7 @@
 import {Component, ViewChild, OnInit, HostBinding, ElementRef, Renderer2, ViewEncapsulation} from '@angular/core';
 import {query, stagger, animate, style, transition, trigger} from '@angular/animations';
 import { Data } from '../../providers/data';
+import { db } from '../../providers/db';
 import { AppInfiniteComponent } from '../../components/app-infinite/app-infinite.component';
 import { Router, NavigationExtras} from '@angular/router';
 
@@ -24,12 +25,17 @@ export class BlogComponent implements OnInit {
 
   constructor(
     public data:Data,
+    public db:db,
     private router:Router,
     private _element: ElementRef,
     private _renderer: Renderer2) {}
 
   ngOnInit() {
-    this.getData();
+
+    this.db._showCachedMessages().then(()=>{
+      this.getData();
+    });
+
     this.getCategories();
   }
 
@@ -40,18 +46,18 @@ export class BlogComponent implements OnInit {
   }
   moveAvart(){
      let avart = this._element.nativeElement.querySelector("#avatar");
-     let src = '../../../assets/kitten-small.png';
+     let src = '/assets/kitten-small.png';
      let count = 0;
      setInterval(()=>{
        switch (count) {
          case 0:
-           src = '../../../assets/kitten-small.png';
+           src = '/assets/kitten-small.png';
            break;
          case 1:
-           src = '../../../assets/kitten-medium.png';
+           src = '/assets/kitten-medium.png';
            break;
          case 2:
-           src = '../../../assets/kitten-large.png';
+           src = '/assets/kitten-large.png';
            break;
        }
        avart.src = src;
@@ -146,6 +152,31 @@ export class BlogComponent implements OnInit {
     this.infinite.enable(true);
   }
 
+  // called when the web socket sends message data
+  _cacheMessage (messages) {
+
+    this.db._dbPromise.then(function(db) {
+      if (!db) return;
+
+      let tx = db.transaction('blogs', 'readwrite');
+      let store = tx.objectStore('blogs');
+      messages.forEach(function(message) {
+        console.log(message);
+        store.put(message);
+      });
+
+      // limit store to 30 items
+      // store.index('by-date').openCursor(null, "prev").then(function(cursor) {
+      //   return cursor.advance(30);
+      // }).then(function deleteRest(cursor) {
+      //   if (!cursor) return;
+      //   cursor.delete();
+      //   return cursor.continue().then(deleteRest);
+      // });
+    });
+
+  };
+
   // 更新列表数据
   updateListState(data){
     this.next_page = data.articles.current_page + 1;
@@ -154,7 +185,9 @@ export class BlogComponent implements OnInit {
       item.created_at = item.created_at.substring(0,10);
       item.tag = item.tag.trim() == "" ? []:item.tag.trim().split(" ");
     });
+    this.db._cacheMessage(temArticles);
     this.articles = this.articles.length ? this.articles.concat(temArticles): temArticles;
+  
   }
 
   // 没有更多内容
