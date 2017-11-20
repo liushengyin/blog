@@ -4,6 +4,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import {Observable}  from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class Data {
@@ -12,9 +13,7 @@ export class Data {
     
     public user = '';
     public companyName = '';
-    // public userurl = "http://manager.liushengyin.net/api/";
-    public userurl = "https://www.liushengyin.com/api/";
-
+    public userurl = environment.baseUrl;
     public userName = '';
     public account = "";
     public role = "";
