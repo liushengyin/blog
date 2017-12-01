@@ -6,6 +6,5 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-export * from './refresher-module';
 export * from './app-refresher.component';
 export * from './refresher';

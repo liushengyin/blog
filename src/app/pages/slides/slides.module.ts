@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComponentsModule } from '../../components/components.module';
 import { SlidesComponent } from './slides.component';
 import { MatButtonModule, MatListModule } from '@angular/material';
+import { MatToolbarModule } from '../../components/toolbar';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     ComponentsModule,
     MatButtonModule,
     MatListModule,
+    MatToolbarModule,
     RouterModule,
     RouterModule.forChild(routes)
   ],

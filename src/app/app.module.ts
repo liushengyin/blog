@@ -8,6 +8,7 @@ import { FormsModule }    from '@angular/forms';
 import { MaterialModule } from './material-module';
 import { ComponentsModule } from './components/components.module';
 import { AppRoutingModule } from './app-routes';
+import { MatToolbarModule } from './components/toolbar';
 
 import { Data } from './providers/data';
 
@@ -31,6 +32,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     FormsModule,
     MaterialModule,
     ComponentsModule,
+    MatToolbarModule,
     AppRoutingModule
   ],
   providers: [Data],
