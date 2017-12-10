@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogDetailComponent } from './pages/blog/blog-detail/blog-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { HeroesComponent } from './pages/heroes/heroes.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     BlogComponent,
     BlogDetailComponent,
     NotFoundComponent,
+    HeroesComponent,
   ],
   imports: [
     BrowserModule,

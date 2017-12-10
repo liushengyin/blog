@@ -7,7 +7,6 @@
             (slidestart) = "_onSlideStart($event)"
             (swipe)="onSwipe($event);swipeCount = swipeCount + 1;" -->
     <mat-toolbar color="primary" >
-
     <button mat-icon-button (click)="goBack()">
         <span class="arrow_back"></span>
     </button>
@@ -25,7 +24,15 @@
            <p>Slide: {{slideCount}}</p>
     </div>
      -->
+
   <div class="demo-content">
+
+  <app-modal></app-modal>
+
+  <button mat-button (click)="showAlert()">
+    showAlert
+  </button>
+
     <app-drawer #drawer></app-drawer>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingText="下拉刷新">

@@ -6,7 +6,19 @@ import { AppRefresherComponent, Refresher } from './app-refresher';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [AppDrawerComponent,AppInfiniteComponent, AppRefresherComponent,Refresher],
-  exports: [AppDrawerComponent,AppInfiniteComponent, AppRefresherComponent,Refresher]
+    declarations: [
+    AppDrawerComponent,
+    AppInfiniteComponent,
+    AppRefresherComponent,
+    Refresher,
+
+  ],
+  exports: [
+    AppDrawerComponent,
+    AppInfiniteComponent,
+    AppRefresherComponent,
+    Refresher,
+
+  ]
 })
 export class ComponentsModule { }
