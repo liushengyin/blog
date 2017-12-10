@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , ErrorHandler} from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpModule }    from '@angular/http';
@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routes';
 import { MatToolbarModule } from './components/toolbar';
 
 import { Data } from './providers/data';
+import { MyErrorHandler } from './providers/error-handler';
 
 import { AppComponent } from './app.component';
 import { BlogComponent } from './pages/blog/blog.component';
@@ -35,7 +36,10 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MatToolbarModule,
     AppRoutingModule
   ],
-  providers: [Data],
+  providers: [
+  Data,
+  {provide: ErrorHandler, useClass: MyErrorHandler}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
