@@ -2,20 +2,21 @@ import { Component ,ViewEncapsulation} from '@angular/core';
 import 'hammerjs';
 import {trigger, AnimationMetadata, keyframes, animate, style, group, animateChild, query, stagger, transition} from '@angular/animations';
 // import {routerAnimations} from './routerAnimations';
+import * as ttiPolyfill from 'tti-polyfill/tti-polyfill';
 
 // export const routerAnimations: AnimationMetadata = trigger('routerAnimations', [
 //       transition('blog => slides', [
 //         query(':leave, :enter',
 //           style({
 //            position: 'absolute',
-//            top: 0, 
-//            left: 0, 
-//            right: 0 , 
-//            width:'100%', 
+//            top: 0,
+//            left: 0,
+//            right: 0 ,
+//            width:'100%',
 //            height:'100%',
 //          })),
 //         query(':enter', [
-//             style({ 
+//             style({
 //               transform: 'translateX(100%)'
 //          })
 //         ]),
@@ -37,14 +38,14 @@ import {trigger, AnimationMetadata, keyframes, animate, style, group, animateChi
 //         query(':leave, :enter',
 //           style({
 //            position: 'absolute',
-//            top: 0, 
-//            left: 0, 
-//            right: 0 , 
-//            width:'100%', 
+//            top: 0,
+//            left: 0,
+//            right: 0 ,
+//            width:'100%',
 //            height:'100%',
 //          })),
 //         query(':enter', [
-//             style({ 
+//             style({
 //               transform: 'translateX(-100%)'
 //          })
 //         ]),
@@ -80,5 +81,31 @@ export class AppComponent {
   //   const animation = outlet.activatedRouteData['animation'] || {};
   //   return animation['value'] || null;
   // }
+  constructor()
+  {
+    this.recordTTI();
+  }
+
+  recordTTI(){
+
+    ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
+
+      console.log({
+        eventCategory: 'Performance Metrics',
+        eventAction: 'TTI',
+        eventValue: tti,
+        nonInteraction: true,
+      });
+
+      (<any>window).ga('send', 'event', {
+        eventCategory: 'Performance Metrics',
+        eventAction: 'TTI',
+        eventValue: tti,
+        nonInteraction: true,
+      });
+    });
+
+  }
+
 }
 

@@ -6,7 +6,7 @@
   <meta name="keywords" content="刘圣印,liushengyin,shengyin,liu shengyin,blog,博客" />
   <meta name="description" content="刘圣印的博客，liushengyin blog" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
   <!-- Web Application Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -32,6 +32,41 @@
   <base href="/">
 
   <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Tracking FP/FCP start-->
+
+  <!-- Add the async Google Analytics snippet first. -->
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-93339318-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    <!-- Register the PerformanceObserver to track paint timing. -->
+    <script>
+    var observer = new PerformanceObserver(function(list) {
+      for (var entry of list.getEntries()) {
+        // `name` will be either 'first-paint' or 'first-contentful-paint'.
+        var metricName = entry.name;
+        var time = Math.round(entry.startTime + entry.duration);
+
+        var event = {
+          eventCategory: 'Performance Metrics',
+          eventAction: metricName,
+          eventValue: time,
+          nonInteraction: true,
+        };
+
+        ga('send', 'event', event);
+
+        console.log(event);
+
+      }
+    });
+    observer.observe({entryTypes: ['paint']});
+    </script>
+    <!-- Tracking FP/FCP end-->
+
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 </head>
