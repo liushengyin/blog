@@ -10,7 +10,9 @@
       "assets": [
         "assets",
         "favicon.png",
-        "manifest.json"
+        "manifest.json",
+        "service-worker.js",
+        "sw-toolbox.js"
       ],
       "index": "index.html",
       "main": "main.ts",

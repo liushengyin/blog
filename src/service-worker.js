@@ -14,11 +14,9 @@ self.toolbox.options.cache = {
 // pre-cache our key assets
 self.toolbox.precache(
   [
-    './inline.bundle.js',
-    './polyfills.bundle.js',
-    './styles.bundle.js',
-    './vendor.bundle.js',
-    './main.bundle.js',
+    // './build/main.js',
+    // './build/main.css',
+    // './build/polyfills.js',
     'index.html',
     'manifest.json'
   ]
