@@ -90,7 +90,12 @@ export class AppComponent {
 
     ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
 
-      console.log('TTI',tti);
+      console.log({
+        eventCategory: 'Performance Metrics',
+        eventAction: 'TTI',
+        eventValue: tti,
+        nonInteraction: true,
+      });
 
       (<any>window).ga('send', 'event', {
         eventCategory: 'Performance Metrics',
