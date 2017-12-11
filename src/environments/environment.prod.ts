@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl:"http://manager.liushengyin.net/api/"
+  baseUrl:"https://manager.liushengyin.net/api/"
 };
