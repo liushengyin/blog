@@ -66,7 +66,13 @@
     observer.observe({entryTypes: ['paint']});
     </script>
     <!-- Tracking FP/FCP end-->
-
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(){ console.log('service worker installed') })
+        .catch(function( err ) { console.log('Error', err) });
+    }
+  </script>
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet"> -->
 </head>
