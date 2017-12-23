@@ -1,5 +1,23 @@
 import { Component, OnInit, EventEmitter, Input, Output, ElementRef ,HostListener } from '@angular/core';
 
+const STATE_ENABLED = 'enabled';
+const STATE_DISABLED = 'disabled';
+const STATE_LOADING = 'loading';
+
+/*
+  html:
+  <infinite-scroll loadingText="加载更多" (infinite)="doInfinite($event)">
+  </infinite-scroll>
+
+  ts:
+  doInfinite(infinite) {
+    setTimeout(() => {
+      infinite.complete();
+    }, 500);
+  }
+
+*/
+
 @Component({
   selector: 'infinite-scroll',
   templateUrl: './app-infinite.component.html',
@@ -14,14 +32,12 @@ export class AppInfiniteComponent implements OnInit {
   state: string = STATE_ENABLED;
 
   clientHeight = null;
-  
-  /**
-   * @input {string} 
-   */
+
   @Input()
   get threshold(): string {
     return this._thr;
   }
+
   set threshold(val: string) {
     this._thr = val;
     if (val.indexOf('%') > -1) {
@@ -32,16 +48,12 @@ export class AppInfiniteComponent implements OnInit {
       this._thrPc = 0;
     }
   }
-  /**
-   * @input {boolean} 
-   */
+
   @Input()
   set enabled(shouldEnable: boolean) {
     this.enable(shouldEnable);
   }
-  /**
-   * @input {string} Optional text to display while loading.
-   */
+
   @Input() loadingText: string;
 
   @Output() infinite: EventEmitter<AppInfiniteComponent> = new EventEmitter<AppInfiniteComponent>();
@@ -60,15 +72,14 @@ export class AppInfiniteComponent implements OnInit {
   @HostListener("window:scroll",['$event'])
   onWindowScroll(ev) {
     if (this.state === STATE_LOADING || this.state === STATE_DISABLED) {
-        return 1;
+        return;
     }
 
     if (this._lastCheck + 32 > ev.timeStamp) {
-        return 2;
+        return;
     }
     this._lastCheck = ev.timeStamp;
 
-    // ******** DOM READ ****************
     let d = this._elementRef.nativeElement.getBoundingClientRect();
     const threshold = this._thrPc ? (this.clientHeight * this._thrPc) : this._thrPx;
 
@@ -82,9 +93,9 @@ export class AppInfiniteComponent implements OnInit {
           this.state = STATE_LOADING;
           this.infinite.emit(this);
         }
-        return 3;
+        return;
     }
-    return 5;
+    return;
   }
 
   @HostListener("window:resize")
@@ -92,22 +103,8 @@ export class AppInfiniteComponent implements OnInit {
       this.clientHeight = this.getClientHeight();
   }
 
-  /**
-   * @param {boolean}
-   */
   enable(shouldEnable: boolean) {
-    // 防止抖动 TODO 这种解决方案不好，应该另想方法
-    setTimeout(()=>{
       this.state = (shouldEnable ? STATE_ENABLED : STATE_DISABLED);
-    },200);
-  }
-
-  /**
-  * @param {Promise<any>}
-  */
-  waitFor(action: Promise<any>) {
-    const enable = this.complete.bind(this);
-    action.then(enable, enable);
   }
 
   complete() {
@@ -115,7 +112,6 @@ export class AppInfiniteComponent implements OnInit {
       return;
     }
     this.state = STATE_DISABLED;
-    // 防止抖动 TODO 这种解决方案不好，应该另想方法
     setTimeout(()=>{
       this.state = STATE_ENABLED;
     },100);
@@ -123,6 +119,4 @@ export class AppInfiniteComponent implements OnInit {
   }
 }
 
-const STATE_ENABLED = 'enabled';
-const STATE_DISABLED = 'disabled';
-const STATE_LOADING = 'loading';
+

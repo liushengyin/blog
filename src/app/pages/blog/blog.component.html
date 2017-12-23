@@ -58,18 +58,18 @@
 
       对坐读书终卷后
 
-      自披衣被扫山房
+      自披衣被扫僧房
       </pre>
       </mat-card-content>
     </mat-card>
     <!-- 分类开始 -->
     <button mat-menu-item class="slide-button" (click)="refresh();start.close()">全部</button>
-    
+
     <mat-expansion-panel *ngFor="let category of categories" [hideToggle]="hideToggle">
       <mat-expansion-panel-header>{{category.name}}</mat-expansion-panel-header>
       <mat-nav-list>
-        <a mat-list-item 
-           (click)="getDataFromCategory(item);start.close()" 
+        <a mat-list-item
+           (click)="getDataFromCategory(item);start.close()"
            *ngFor="let item of category.subCategorList" >
           {{item.name}}
         </a>
@@ -78,7 +78,7 @@
 
     <button mat-button tabindex="-1" (click)="start.close()">关闭</button>
     <!-- 分类结束 -->
-  
+
   </mat-sidenav>
 
   <div  class="m-content">
@@ -106,7 +106,7 @@
     </div>
 
     <infinite-scroll #infinite loadingText="加载更多" (infinite)="doInfinite($event)"></infinite-scroll>
- 
+
     <div *ngIf='empty' class="empty-text">没有更多内容</div>
   </div>
 

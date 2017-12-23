@@ -101,7 +101,7 @@ export class BlogComponent implements OnInit {
 
     this.data.get(url)
            .subscribe(
-             data =>{ 
+             data =>{
                this.categories = data.categorys;
              },
              error =>{this.handleError(error);}
@@ -206,7 +206,7 @@ export class BlogComponent implements OnInit {
         }
     } else {
       if (document.exitFullscreen) {
-          document.exitFullscreen(); 
+          document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
           document.webkitExitFullscreen();
         }
